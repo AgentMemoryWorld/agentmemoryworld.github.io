@@ -4,6 +4,7 @@
    3. Pointing at the dial shows that day and time, what was logged, and the most common activities then.
    4. The faces are buttons: they swap the Jarvis card for that moment's story.
    5. The legend is eight sub-dials (when in the day, hours per day) for the current scale, and focuses the dial.
+   6. Jarvis, in the centre disc, looks at what the visitor points at (else the open face, else the hour hand) and takes the open face's mood.
    The activity pattern is illustrative (tools/make_hero.py). */
 (() => {
   const clock = document.querySelector('.clock-a');
@@ -40,6 +41,38 @@
     const t0 = performance.now(), ease = x => 1 - Math.pow(1 - x, 3);
     const tick = now => { const x = Math.min(1, (now - t0) / 1400); draw(x < 1 ? ease(x) : 1); requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
+  })();
+
+  /* ---------- 6. Jarvis: the agent in the centre disc (src/_agent.html, styles at the end of page-home.css) ---------- */
+  // gaze: the pointer while the dial is explored or a face is hovered, else the open face, else the tip of the hour hand;
+  // mood: the open face's mood (its .md carries pos | neg | help), calm when nothing is open. The gaze eases; reduced motion sets it directly.
+  const ag = wrap.querySelector('.jv .ag');
+  const jarvis = (() => {
+    if (!ag) return { look() {}, lookAt() {}, release() {}, update() {} };
+    let ptr = null, tx = 0, ty = 0, gx = 0, gy = 0, raf = 0;
+    const put = () => {
+      ag.style.setProperty('--gx', gx.toFixed(3)); ag.style.setProperty('--gy', gy.toFixed(3));
+      ag.style.setProperty('--lean-dir', Math.abs(gx) < .25 ? '-1' : gx > 0 ? '1' : '-1');  // which way the head cocks when helping
+    };
+    const step = () => { gx += (tx - gx) * .16; gy += (ty - gy) * .16; put(); raf = Math.abs(tx - gx) > .002 || Math.abs(ty - gy) > .002 ? requestAnimationFrame(step) : 0; };
+    const aim = (x, y) => { tx = x; ty = y; if (reduce) { gx = tx; gy = ty; put(); } else if (!raf) raf = requestAnimationFrame(step); };
+    const towards = (x, y) => {  // client point -> gaze from the disc centre in units of the dial radius, clamped to the unit circle
+      const j = ag.getBoundingClientRect(), R = wrap.getBoundingClientRect().width / 2;
+      let x1 = (x - j.left - j.width / 2) / R * 1.15, y1 = (y - j.top - j.height / 2) / R * 1.15;
+      const n = Math.hypot(x1, y1); if (n > 1) { x1 /= n; y1 /= n; }
+      return [x1, y1];
+    };
+    const centre = el => { const b = el.getBoundingClientRect(); return [b.left + b.width / 2, b.top + b.height / 2]; };
+    function update() {
+      const on = wrap.querySelector('.moment.on'), md = on && on.querySelector('.md');
+      ag.dataset.mood = (md && ['pos', 'neg', 'help'].find(k => md.classList.contains(k))) || (on && on.dataset.mk) || 'calm';
+      if (ptr) aim(...towards(ptr[0], ptr[1]));
+      else if (on) aim(...towards(...centre(on.querySelector('.mb') || on)));
+      else { const d = new Date(), a = (d.getHours() + d.getMinutes() / 60) / 24 * 2 * Math.PI; aim(Math.sin(a) * .9, -Math.cos(a) * .9); }
+    }
+    setInterval(() => { if (!ptr && !wrap.querySelector('.moment.on')) update(); }, 30000);  // the hour hand moves on
+    update();
+    return { look(x, y) { ptr = [x, y]; update(); }, lookAt(el) { ptr = centre(el); update(); }, release() { ptr = null; update(); }, update };
   })();
 
   /* ---------- 3. explorer ---------- */
@@ -88,8 +121,9 @@
     dot.setAttribute('cx', (C + rg.r * Math.cos(ang)).toFixed(1));
     dot.setAttribute('cy', (C + rg.r * Math.sin(ang)).toFixed(1));
     cursor.classList.add('on'); wrap.classList.add('exploring');
+    jarvis.look(evt.clientX, evt.clientY);
   }
-  function hide() { if (pinned) return; tip.hidden = true; cursor.classList.remove('on'); wrap.classList.remove('exploring'); }
+  function hide() { if (pinned) return; tip.hidden = true; cursor.classList.remove('on'); wrap.classList.remove('exploring'); jarvis.release(); }
   clock.addEventListener('pointermove', e => { if (pinned) return; const q = at(e); q ? render(e, q) : hide(); });
   clock.addEventListener('pointerleave', hide);
   clock.addEventListener('click', e => { const q = at(e); pinned = false; if (!q) { hide(); return; } render(e, q); pinned = true; });
@@ -101,6 +135,7 @@
   const moments = [...wrap.querySelectorAll('.moment')];
   function select(m) {
     moments.forEach(x => x.classList.toggle('on', x === m));
+    jarvis.update();
     Object.values(cards).forEach(c => { if (!m || c.el.dataset.scale !== m.dataset.scale) { c.el.innerHTML = c.html; c.el.classList.remove('story'); } });
     if (!m) return;
     const s = m.dataset, card = cards[s.scale];
@@ -112,6 +147,10 @@
     card.el.classList.add('story');
   }
   moments.forEach(m => m.addEventListener('click', e => { e.stopPropagation(); select(m.classList.contains('on') ? null : m); }));
+  moments.forEach(m => {  // Jarvis looks at the person under the pointer
+    m.addEventListener('pointerenter', () => jarvis.lookAt(m.querySelector('.mb') || m));
+    m.addEventListener('pointerleave', () => jarvis.release());
+  });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { pinned = false; hide(); select(null); } });
 
   /* ---------- 5. legend: one sub-dial per activity for the current scale ---------- */

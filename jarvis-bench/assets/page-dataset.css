@@ -174,7 +174,7 @@
 .ds-stage.check { border-color: var(--line-2); background: linear-gradient(180deg, #fff, var(--bg-2)); }
 .ds-stage.check h4 { border-top-color: var(--line-2); }
 
-.ds-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ds-checks { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }   /* minmax(0, …): an open Table twin may not widen a card */
 .ds-check { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 20px 22px; }
 .ds-check h3 { margin: 8px 0 0; font: 700 16.5px/1.3 var(--f-head); letter-spacing: -.01em; }
 .ds-check p { margin: 6px 0 0; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
@@ -228,6 +228,7 @@
 }
 @media (max-width: 960px) {
   .ds-head, .ds-two, .ds-two.wide, .ds-rel, .ds-checks, .ds-priv { grid-template-columns: 1fr; }
+  .ds-checks { grid-template-columns: minmax(0, 1fr); }
   .ds-head { gap: 32px; }
   .ds-stats { grid-template-columns: repeat(3, 1fr); }
   .ds-stat:nth-child(4) { border-left: 0; }
@@ -280,60 +281,131 @@
 .ds-div-foot, .ds-comp-foot p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
 .ds-div-foot { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); max-width: 780px; }
 
-/* the two validation checks: text on top, chart below */
-.ds-check { display: flex; flex-direction: column; gap: 0; padding: 20px 22px 18px; }
+/* the two validation checks: text on top, chart below. Each card is a size container, so the charts switch variants on the card's own width. */
+.ds-check { display: flex; flex-direction: column; gap: 0; padding: 22px 24px 20px; min-width: 0; container-type: inline-size; container-name: check; }
 .ck-head { display: grid; grid-template-columns: 36px 1fr; gap: 16px; }
-.ds-dumb { margin-top: 20px; display: grid; gap: 2px; }
-.ds-dumb .dr { display: grid; grid-template-columns: 118px 1fr 36px 1fr 36px; column-gap: 8px; align-items: center; height: 30px; }
-.ds-dumb .dr.hd { height: auto; margin-bottom: 4px; }
-.ds-dumb .dh, .ds-dumb .dr.hd .dv { font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
-.ds-dumb .dm { font: 600 12px/1.2 var(--f-body); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ds-dumb .db { position: relative; height: 30px; }
-.ds-dumb .db::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid #F1ECE3; }
-.ds-dumb .ln { position: absolute; top: 50%; height: 2px; margin-top: -1px; background: #B9D3DB; }
-.ds-dumb .pt { position: absolute; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; box-shadow: 0 0 0 2px #fff; }
-.ds-dumb .pt.a { background: #8DBBC9; } .ds-dumb .pt.f { background: var(--ipr); }
-.ds-dumb .dv { text-align: right; font: 600 12px/1 var(--f-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.ds-dumb .dr.ax { height: 14px; margin-top: 4px; align-items: start; }
-.ds-dumb .dt { position: relative; height: 14px; border-top: 1px solid var(--line-2); }
-.ds-dumb .dt span { position: absolute; top: 4px; transform: translateX(-50%); font: 500 10px/1 var(--f-mono); color: var(--ink-3); }
-.ds-dumb .dt span:first-child { transform: none; } .ds-dumb .dt span:last-child { transform: translateX(-100%); }
-.ds-legend.small { margin-top: 14px; font-size: 12px; gap: 6px 16px; align-items: center; }
+
+/* 01 anchor-only vs full: dumbbell rows, one panel per condition, both on one shared 20-70% axis; chance (25%) is a dashed reference line
+   inside the plot. Filled dot = full trajectory as released, hollow dot = anchor-only, the arrowhead points along the drop; deltas sit in
+   their own column. Marks are placed with the --a (anchor-only position, %) and --w (drop width, %) variables written by the generator. */
+.ds-dumb { --nm: 112px; --dv: 44px; --gap: 12px; --row: 30px; position: relative; margin-top: 22px; }
+.ds-dumb .gl { position: absolute; left: calc(var(--nm) + var(--gap)); right: calc(var(--dv) + var(--gap)); top: 0; bottom: 26px; pointer-events: none; }
+.ds-dumb .gl i { position: absolute; top: 0; bottom: 0; width: 1px; margin-left: -.5px; background: #F1ECE3; }
+.ds-dumb .gl i.c { width: 0; background: none; border-left: 1px dashed #CFC6B6; }   /* the chance threshold, not a gridline */
+.ds-dumb .dr { position: relative; display: grid; grid-template-columns: var(--nm) minmax(0, 1fr) var(--dv); column-gap: var(--gap); align-items: center; height: var(--row); }
+.ds-dumb .dr.th { grid-template-columns: minmax(0, 1fr) var(--dv); height: 26px; }
+.ds-dumb .dr.sp { height: 18px; }
+.ds-dumb .dr.ax { height: 26px; align-items: start; }
+.ds-dumb .dh { justify-self: start; padding-right: 10px; background: var(--paper); font: 600 12.5px/1 var(--f-body); color: var(--ink); white-space: nowrap; }
+.ds-dumb .dh span { margin-left: 7px; font: 500 10.5px/1 var(--f-mono); color: var(--ink-3); letter-spacing: .04em; }
+.ds-dumb .dr.th .dv, .ds-dumb .du { font: 500 10px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.ds-dumb .du { position: absolute; right: calc(var(--dv) + var(--gap)); top: 50%; transform: translateY(-50%); padding-left: 8px; background: var(--paper); white-space: nowrap; }
+.ds-dumb .dm { font: 500 12.5px/1.2 var(--f-body); color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ds-dumb .db { position: relative; height: var(--row); container-type: inline-size; border-radius: 6px; outline: none; }
+.ds-dumb .db:focus-visible { box-shadow: 0 0 0 2px var(--ipr-line); }
+.ds-dumb .ln { position: absolute; top: 50%; left: calc(var(--a) * 1%); width: calc(var(--w) * 1%); height: 2px; margin-top: -1px; background: #B9D3DB; }
+.ds-dumb .ar { position: absolute; top: 50%; left: calc(var(--a) * 1% + 9px); width: clamp(0px, calc((var(--w) * 1cqw - 28px) * 100), 7px); height: 9px; margin-top: -4.5px; background: #5E9DB0; clip-path: polygon(100% 0, 0 50%, 100% 100%); }
+.ds-dumb .pt { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; box-shadow: 0 0 0 2px var(--paper); }
+.ds-dumb .pt.a { left: calc(var(--a) * 1%); background: var(--paper); border: 2px solid #5E9DB0; }
+.ds-dumb .pt.f { left: calc((var(--a) + var(--w)) * 1%); background: var(--ipr); }
+.ds-dumb .dv { text-align: right; font: 500 12px/1 var(--f-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.ds-dumb .dr:hover .dm, .ds-dumb .dr:focus-within .dm, .ds-dumb .dr:hover .dv, .ds-dumb .dr:focus-within .dv { color: var(--ink); }
+.ds-dumb .dr:hover .ln, .ds-dumb .dr:focus-within .ln { background: #8DBBC9; }
+.ds-dumb .dt { position: relative; height: 26px; border-top: 1px solid var(--line-2); }
+.ds-dumb .dt span { position: absolute; top: 6px; transform: translateX(-50%); font: 500 10px/1 var(--f-mono); color: var(--ink-3); white-space: nowrap; text-align: center; }
+.ds-dumb .dt span small { display: block; margin-top: 3px; font-size: 8.5px; letter-spacing: .06em; text-transform: uppercase; color: #B3AA9C; }
+.ds-legend.small { margin-top: 16px; font-size: 12px; gap: 6px 16px; align-items: center; }
 .ds-legend.small i { width: 10px; height: 10px; }
+.ds-legend.small.col { flex-direction: column; align-items: flex-start; gap: 4px; }
+.ds-legend.small.col span + span { color: var(--ink-3); }
 .ds-legend i.pa, .ds-legend i.pf { border-radius: 50%; }
-.ds-legend i.pa { background: #8DBBC9; } .ds-legend i.pf { background: var(--ipr); }
+.ds-legend i.pa { background: var(--paper); border: 2px solid #5E9DB0; } .ds-legend i.pf { background: var(--ipr); }
 .ds-legend i.ev { background: var(--ipr); } .ds-legend i.tk { background: #8DBBC9; }
 .ds-legend .ax { color: var(--ink-3); margin-left: auto; }
+/* Table twin: headers may wrap, and a table wider than the card scrolls inside .tw instead of widening the card */
 .ds-tbl { margin-top: auto; padding-top: 14px; }
 .ds-tbl summary { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; list-style: none; font: 600 12px/1 var(--f-body); color: var(--ink-3); padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; }
 .ds-tbl summary:hover { color: var(--ink); border-color: var(--line-2); }
 .ds-tbl summary::-webkit-details-marker { display: none; }
 .ds-tbl summary::after { content: ""; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-1px) rotate(45deg); transition: transform .2s; }
 .ds-tbl[open] summary::after { transform: translateY(1px) rotate(-135deg); }
-.ds-tbl table { margin-top: 10px; width: 100%; border-collapse: collapse; font: 500 12px/1.4 var(--f-mono); color: var(--ink-2); }
-.ds-tbl th { text-align: right; font-weight: 500; color: var(--ink-3); padding: 4px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.ds-tbl .tw { margin-top: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ds-tbl table { width: 100%; border-collapse: collapse; font: 500 12px/1.4 var(--f-mono); color: var(--ink-2); }
+.ds-tbl th { text-align: right; vertical-align: bottom; font-weight: 500; color: var(--ink-3); padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.ds-tbl th .nb { white-space: nowrap; }   /* model and synthesizer names never break at their hyphens */
 .ds-tbl td { text-align: right; padding: 4px 6px; border-bottom: 1px solid #F2EDE4; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .ds-tbl th:first-child, .ds-tbl td:first-child { text-align: left; }
 .ds-tbl tr:last-child td { border-bottom: 0; }
-.ds-slope { display: block; width: 100%; height: auto; margin-top: 18px; overflow: visible; }
-.ds-slope .g { stroke: #EFE9DE; stroke-width: 1; }
-.ds-slope .t { font: 500 10.5px var(--f-mono); fill: var(--ink-3); }
-.ds-slope .t2 { font: 500 9.5px var(--f-mono); fill: #B3AA9C; }
-.ds-slope .s { fill: none; stroke: var(--ipr); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; opacity: .8; transition: opacity .15s; }
-.ds-slope .p { fill: var(--ipr); stroke: #fff; stroke-width: 2; transition: opacity .15s; }
-.ds-slope .hit { fill: transparent; cursor: default; }
+.ds-tbl .tn { margin: 8px 0 0; font: 500 11px/1.45 var(--f-mono); color: var(--ink-3); }
+
+/* 02 synthesizer swap: slope chart in HTML with fixed pixel heights and text sizes; only the plot width is fluid. The lines sit in one SVG
+   stretched to the plot (non-scaling strokes), the leader lines in a thin SVG in the gutter. Columns: y ticks | plot | gutter | labels. */
+.ds-slope-wrap { margin-top: 22px; }
+.ds-slope { --yx: 34px; --gut: 22px; --lab: 190px; --ph: 250px; position: relative; padding-bottom: 30px; }
+.ds-slope .sh { position: relative; height: 44px; }
+.ds-slope .hd { position: absolute; top: 0; white-space: nowrap; }
+.ds-slope .hd b { display: block; font: 600 11.5px/14px var(--f-body); color: var(--ink); }
+.ds-slope .hd span { display: block; margin-top: 2px; font: 500 10px/12px var(--f-mono); color: var(--ink-3); }
+.ds-slope .hd em { font-style: normal; }
+.ds-slope .hd.a { left: 0; }
+.ds-slope .hd.b { left: calc(var(--yx) + (100% - var(--yx) - var(--gut) - var(--lab)) / 2); transform: translateX(-50%); text-align: center; }
+.ds-slope .hd.c { left: calc(100% - var(--gut) - var(--lab)); transform: translateX(-50%); text-align: center; }
+.ds-slope .hd.r { right: 0; top: 16px; font: 500 10px/12px var(--f-mono); color: var(--ink-3); }
+.ds-slope .sm { display: none; }
+.ds-slope .sp { display: grid; grid-template-columns: var(--yx) minmax(0, 1fr) var(--gut) var(--lab); height: var(--ph); }
+.ds-slope .yt { position: relative; }
+.ds-slope .yt span { position: absolute; right: 10px; margin-top: -6px; font: 500 10.5px/12px var(--f-mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.ds-slope .pl { position: relative; }
+.ds-slope .band { position: absolute; left: calc(50% - 18px); right: calc(4px - var(--gut)); top: -10px; bottom: -30px; border-radius: 10px; background: var(--bg); }
+.ds-slope .band span { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 500 10px/12px var(--f-mono); color: #B3AA9C; letter-spacing: .02em; white-space: nowrap; }
+.ds-slope .g { position: absolute; left: -8px; right: -8px; height: 1px; background: #EBE5DA; }
+.ds-slope .ln { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+.ds-slope .s { fill: none; stroke: var(--ipr); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; opacity: .85; transition: opacity .15s; }
+.ds-slope .hs { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }   /* wide invisible twin: hovering a line stands for its model */
+.ds-slope .p { position: absolute; display: block; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--ipr); box-shadow: 0 0 0 2px var(--paper); transition: opacity .15s, box-shadow .15s; pointer-events: none; }
+.ds-slope .hit { position: absolute; display: block; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%; outline: none; pointer-events: none; }   /* 28px keyboard stop; the pointer is resolved by the nearest-dot layer in page-dataset.js */
+.ds-slope .hit:focus-visible + .p { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ipr-line); }
+.ds-slope .gt { display: block; width: 100%; height: 100%; overflow: visible; }
 .ds-slope .ld { fill: none; stroke: var(--line-2); stroke-width: 1; }
-.ds-slope .lb { font: 600 11.5px var(--f-body); fill: var(--ink); }
-.ds-slope .lb .d { font: 500 11px var(--f-mono); fill: var(--ink-3); }
-.ds-slope.focus .s:not(.on) { opacity: .15; } .ds-slope.focus .p:not(.on) { opacity: .25; } .ds-slope .s.on { opacity: 1; }
-.ds-tip { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; opacity: 0; transition: opacity .12s; min-width: 160px; padding: 9px 12px 10px; border-radius: 12px;
+.ds-slope .lc { position: relative; }
+.ds-slope .lbl { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; height: 20px; transition: opacity .15s; }
+.ds-slope .rk { flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--paper); font: 600 9.5px/14px var(--f-mono); color: var(--ink-2); text-align: center; font-style: normal; }
+.ds-slope .lb { flex: 1; min-width: 0; font: 600 11.5px/1 var(--f-body); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ds-slope .d { font: 500 11px/1 var(--f-mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.ds-slope.focus .s:not(.on) { opacity: .15; } .ds-slope.focus .p:not(.on) { opacity: .25; } .ds-slope.focus .lbl:not(.on) { opacity: .35; } .ds-slope .s.on { opacity: 1; }
+.ds-slope-key { display: none; margin-top: 16px; }
+.ds-slope-key .kh { display: flex; justify-content: space-between; padding-bottom: 6px; border-bottom: 1px solid var(--line); font: 500 10px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.ds-slope-key ol { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.ds-slope-key li { display: grid; grid-template-columns: 16px 1fr auto; gap: 10px; align-items: center; font: 600 12px/1.3 var(--f-body); color: var(--ink); }
+.ds-slope-key li i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line-2); font: 600 9.5px/14px var(--f-mono); color: var(--ink-2); text-align: center; font-style: normal; }
+.ds-slope-key li b { font: 500 11.5px/1 var(--f-mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+/* narrower cards (two columns on a laptop, or a phone): names and deltas move to the key list, only the rank badges stay on the chart.
+   Container widths are content-box widths: 496px at a 1440 viewport, 428px at 1024, 306px on a 390px phone. */
+@container check (max-width: 484px) {
+  .ds-slope { --lab: 28px; --gut: 16px; }
+  .ds-slope .lb, .ds-slope .d, .ds-slope .hd.r { display: none; }
+  .ds-slope .hd.c { left: auto; right: 0; transform: none; text-align: right; }
+  .ds-slope-key { display: block; }
+}
+@container check (max-width: 372px) {
+  .ds-slope .lg { display: none; } .ds-slope .sm { display: inline; }
+  .ds-tbl th { white-space: nowrap; }   /* the table scrolls inside .tw here, so one-line headers read better than four-line ones */
+  .ds-dumb { --nm: 102px; --dv: 40px; --gap: 8px; }
+  .ds-dumb .dm { font-size: 11px; }
+  .ds-dumb .dh { font-size: 12px; }
+  .ds-dumb .dt span:nth-child(2) { display: none; }   /* the 30 label would touch the chance label on a phone; its gridline stays */
+}
+.ds-tip { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; opacity: 0; transition: opacity .12s; min-width: 160px; max-width: min(360px, calc(100vw - 16px)); padding: 9px 12px 10px; border-radius: 12px;
   background: rgba(255, 255, 255, .98); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(35, 33, 30, .06), 0 14px 30px -10px rgba(35, 33, 30, .22); font-size: 12px; color: var(--ink-2); }
 .ds-tip.on { opacity: 1; }
 .ds-tip b { display: block; font: 700 12.5px/1.2 var(--f-head); color: var(--ink); }
 .ds-tip > span { display: block; margin-top: 3px; font: 500 10.5px/1.3 var(--f-mono); color: var(--ink-3); }
 .ds-tip .r { display: flex; align-items: center; gap: 7px; margin-top: 6px; white-space: nowrap; }
-.ds-tip .r i { width: 8px; height: 8px; border-radius: 50%; flex: none; } .ds-tip .r i.a { background: #8DBBC9; } .ds-tip .r i.f { background: var(--ipr); }
-.ds-tip .r em { margin-left: auto; padding-left: 14px; font: 600 12px/1 var(--f-mono); font-style: normal; color: var(--ink); }
+.ds-tip .r i { width: 8px; height: 8px; border-radius: 50%; flex: none; } .ds-tip .r i.a { background: var(--paper); border: 2px solid #5E9DB0; } .ds-tip .r i.f { background: var(--ipr); }
+.ds-tip .r i.k { width: 10px; height: 2px; border-radius: 1px; background: var(--ipr); } .ds-tip .r.dim em { color: var(--ink-3); font-weight: 500; }
+.ds-tip .r.sum { margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--line); }
+.ds-tip .r em { margin-left: auto; padding-left: 14px; font: 600 12px/1 var(--f-mono); font-style: normal; color: var(--ink); white-space: nowrap; }
+@media (max-width: 480px) { .ds-tip .r { white-space: normal; } }
 
 /* composition of the release: ranked rows, one hue, two shades (events, tokens), figures in columns */
 .ds-comp { padding: 22px 24px 20px; }
@@ -374,7 +446,6 @@
   .ds-comp .cn { grid-column: 1 / -1; }
   .ds-comp .cr.hd .cn { display: none; }
   .ds-comp-foot { grid-template-columns: 1fr; }
-  .ds-dumb .dr { grid-template-columns: 78px 1fr 34px 1fr 34px; column-gap: 6px; }
 }
 
 /* portraits at the top of the page, no caption */
