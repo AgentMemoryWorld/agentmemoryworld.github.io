@@ -1,0 +1,36 @@
+/* Jarvis, the robot in the dial centre (assets/robot/ready): a licensed Lottie character played by lottie-web (SVG renderer).
+   Contract (assets/page-home.js section 6 drives it): root .jv .ag[data-mood] carries --gx / --gy in [-1, 1] and --lean-dir -1 | 1.
+   The Lottie layers are tagged with classes (rb-eyes, rb-face, rb-head, rb-ears) and follow the gaze with the CSS `translate`
+   property, which composes with the transform attribute lottie writes each frame (rotate / scale would not: the layer matrices
+   carry translations, so those go on the wrapper .rb-stage instead). Units inside the svg are Lottie user units (682 x 902 canvas). */
+/* the root is a div (no intrinsic ratio like the old svg.ag), so it is pinned to the disc instead of sized by .jv's grid */
+.jv .ag.rb { position: absolute; inset: 0; display: block; width: auto; height: auto; overflow: hidden; border-radius: 50%; --gx: 0; --gy: 0; --lean-dir: -1; }
+.rb .rb-stage { position: absolute; left: 50%; top: 50%; width: 106%; height: 106%; translate: -50% -47%;
+  transform-origin: 50% 62%; transition: rotate .5s cubic-bezier(.2, .7, .2, 1), scale .5s cubic-bezier(.2, .7, .2, 1); }
+.rb .rb-stage svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* gaze: parallax between eyes, visor, helmet and ears reads as a head turn; a mood offset (--mx / --my) rides along */
+.rb { --mx: 0px; --my: 0px; }
+.rb .rb-eyes { translate: calc(var(--gx) * 24px + var(--mx)) calc(var(--gy) * 13px + var(--my)); transition: filter .35s ease; }
+.rb .rb-face { translate: calc(var(--gx) * 11px + var(--mx) * .5) calc(var(--gy) * 6px + var(--my) * .5); }
+.rb .rb-head { translate: calc(var(--gx) * 6px) calc(var(--gy) * 3.5px); }
+.rb .rb-ears { translate: calc(var(--gx) * 5px) calc(var(--gy) * 3px); }
+.rb .rb-hand { translate: calc(var(--gx) * 2px) 0px; }
+
+/* moods: calm (default) | pos | neg | help */
+.rb[data-mood="pos"] .rb-stage { scale: 1.035; rotate: -2deg; }
+.rb[data-mood="pos"] .rb-eyes { filter: brightness(1.14) saturate(1.1); }
+.rb[data-mood="neg"] { --my: 7px; }
+.rb[data-mood="neg"] .rb-stage { rotate: 2.5deg; scale: .985; }
+.rb[data-mood="neg"] .rb-eyes { filter: brightness(.8) saturate(.85); }
+.rb[data-mood="help"] .rb-stage { rotate: calc(var(--lean-dir) * 4deg); scale: 1.045; }  /* cocks the head towards the person (--lean-dir = sign of --gx) */
+.rb[data-mood="help"] .rb-eyes { animation: rb-glow 2.6s ease-in-out infinite; }
+@keyframes rb-glow {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 0px rgba(236, 157, 104, 0)); }
+  40% { filter: brightness(1.22) drop-shadow(0 0 6px rgba(236, 157, 104, .55)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rb .rb-stage { transition: none; }
+  .rb[data-mood="help"] .rb-eyes { animation: none; filter: brightness(1.15); }
+}
