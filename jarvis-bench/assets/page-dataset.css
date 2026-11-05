@@ -385,3 +385,13 @@
 .ds-tree .r.wrap { height: auto; min-height: 38px; padding: 9px 0; align-items: flex-start; }
 .ds-tree .r.wrap .nm { white-space: normal; line-height: 1.55; }
 .ds-tree .r.wrap .d { padding-top: 2px; }
+
+/* release cards: the stack track may not grow past its column, and the command wraps instead of widening the card (「dataset, code還是超出」) */
+.ds-stack { grid-template-columns: minmax(0, 1fr); }
+.ds-res { min-width: 0; }
+.ds-cmd code { white-space: normal; overflow-wrap: anywhere; overflow-x: visible; }
+.ds-tree .nm { flex: none; }
+.ds-tree .d { flex: 1 1 auto; min-width: 0; white-space: normal; }
+@media (max-width: 1100px) { .ds-rel { grid-template-columns: minmax(0, 1fr); } }
+.ds-tree .r.wrap .nm { flex: 0 1 auto; min-width: 0; }
+@media (max-width: 420px) { .ds-tree .nm { font-size: 11.5px; } .ds-tree ul { padding-left: 20px; } }
