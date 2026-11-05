@@ -555,6 +555,6 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 44px; font-size: 13p
 .hero-band { margin-top: 46px; }
 .hero-band .label { text-align: center; font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
 .hero-band .logos { margin-top: 20px; }
-.hero-band .marquee { max-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.hero-band .marquee { max-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }  /* runs inside the content width, like the sections above and below */
 .hero-band .marquee .set { gap: 56px; padding-right: 56px; }
 @media (max-width: 620px) { .hero-band { margin-top: 34px; } .hero-band .marquee .set { gap: 36px; padding-right: 36px; } }
