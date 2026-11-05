@@ -1,0 +1,157 @@
+/* Home hero: watch-face life clock (tools/make_hero.py); live hands in assets/page-home.js. */
+.clock-a { overflow: visible; }
+.clock-a .case { transform-box: fill-box; transform-origin: center; }
+
+/* entrance: rings settle from the inside out, the sweep turns into place, the lit band and chapter ring fade in */
+.clock-a .chapter { animation: a-fade .9s ease-out both; }
+.clock-a .day { animation: a-dayin .7s cubic-bezier(.2, .6, .2, 1) both; animation-delay: calc(var(--d, 0) * 17ms); }
+.clock-a .glow { animation: a-fade 1s ease-out both; animation-delay: .8s; }
+/* hands: rotated by assets/page-home.js around the dial centre */
+.clock-a .hrs, .clock-a .mins, .clock-a .secs { transform-box: view-box; transform-origin: 50% 50%; will-change: transform; }
+.clock-a .trail { animation: a-fade .8s ease-out both; animation-delay: .2s; }
+
+@keyframes a-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes a-dayin { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .clock-a .chapter, .clock-a .day, .clock-a .glow, .clock-a .trail { animation: none; }
+  .clock-a .secs { display: none; }
+}
+
+/* explorer: cursor on the dial and the detail card */
+.clock-a { cursor: crosshair; }
+.clock-a .cursor { opacity: 0; transition: opacity .15s; pointer-events: none; }
+.clock-a .cursor.on { opacity: 1; }
+.clock-a .cur-arm { transform-box: view-box; transform-origin: 50% 50%; }
+.clock-wrap.exploring .moment .mc { opacity: .55; transition: opacity .15s; }
+.clock-tip { position: absolute; z-index: 6; width: 232px; padding: 12px 14px 12px; border-radius: 14px; background: rgba(255, 255, 255, .97);
+  border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(35, 33, 30, .06), 0 16px 36px -10px rgba(35, 33, 30, .22); pointer-events: none; font-size: 12.5px; color: var(--ink-2); }
+.clock-tip .ct-h { display: flex; justify-content: space-between; font: 600 11px/1 var(--f-mono); letter-spacing: .06em; color: var(--ink-3); text-transform: uppercase; }
+.clock-tip .ct-on { display: flex; align-items: center; gap: 8px; margin-top: 9px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.clock-tip .ct-on i, .clock-tip .ct-row i { display: block; height: 100%; border-radius: 99px; }
+.clock-tip .ct-on > i { width: 10px; height: 10px; flex: none; }
+.clock-tip .ct-on b { font: 700 14px/1.2 var(--f-head); color: var(--ink); }
+.clock-tip .ct-on span { margin-left: auto; font: 500 11.5px/1 var(--f-mono); color: var(--ink-3); }
+.clock-tip .ct-on.none { color: var(--ink-3); font-style: italic; }
+.clock-tip .ct-sh { margin-top: 9px; font: 500 10.5px/1.3 var(--f-mono); letter-spacing: .04em; color: var(--ink-3); }
+.clock-tip .ct-row { display: grid; grid-template-columns: 62px 1fr 22px; align-items: center; gap: 8px; margin-top: 6px; }
+.clock-tip .ct-bar { height: 6px; border-radius: 99px; background: #F1ECE3; overflow: hidden; }
+.clock-tip .ct-n { text-align: right; font: 500 11px/1 var(--f-mono); color: var(--ink-3); }
+.clock-tip .ct-row.none { display: block; color: var(--ink-3); font-style: italic; }
+
+/* faces are buttons */
+.moment { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; }
+.moment .mb { transition: transform .2s, box-shadow .2s; }
+.moment:hover .mb, .moment:focus-visible .mb { transform: scale(1.05); }
+.moment:focus-visible { outline: none; }
+.moment:focus-visible .mb { box-shadow: 0 0 0 3px rgba(47, 127, 150, .35), 0 10px 24px rgba(35, 33, 30, .09); }
+.moment.on .mb { box-shadow: 0 0 0 3px var(--paper), 0 0 0 4.5px var(--ink), 0 10px 24px rgba(35, 33, 30, .12); }
+.moment.on .mc { border-color: var(--ink); }
+
+/* the Jarvis card shows a moment's story */
+.jv-say.story { display: grid; gap: 6px; border-color: var(--line-2); }
+.jv-say .st-h { margin: 0; color: var(--ink-3); }
+.jv-say .st-q { font-style: italic; color: var(--ink); font-size: 13px; }
+.jv-say .st-m { justify-self: start; font: 600 11.5px/1 var(--f-body); padding: 4px 8px; border-radius: 99px; }
+.jv-say .st-m.pos { color: var(--pos); background: rgba(63, 143, 90, .1); }
+.jv-say .st-m.neg { color: var(--neg); background: rgba(194, 70, 62, .09); }
+.jv-say .st-m.help { color: var(--pro); background: rgba(188, 106, 57, .1); }
+.jv-say .st-t { font: 700 12.5px/1.3 var(--f-head); }
+.jv-say .st-t.emo { color: var(--emo); } .jv-say .st-t.ipr { color: var(--ipr); } .jv-say .st-t.pro { color: var(--pro); }
+.jv-say .st-n { font-size: 12px; line-height: 1.45; color: var(--ink-3); }
+.jv-say .st-j { margin-top: 2px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-2); }
+.jv-say .st-j b { display: block; margin-bottom: 3px; font: 600 10.5px/1 var(--f-mono); letter-spacing: .1em; color: var(--pro); }
+
+.clock-a path[data-k] { transition: stroke-opacity .2s; }
+.clock-a[data-focus="wake"] path[data-k]:not([data-k="wake"]) { stroke-opacity: .07; }
+.clock-a[data-focus="transit"] path[data-k]:not([data-k="transit"]) { stroke-opacity: .07; }
+.clock-a[data-focus="work"] path[data-k]:not([data-k="work"]) { stroke-opacity: .07; }
+.clock-a[data-focus="food"] path[data-k]:not([data-k="food"]) { stroke-opacity: .07; }
+.clock-a[data-focus="exercise"] path[data-k]:not([data-k="exercise"]) { stroke-opacity: .07; }
+.clock-a[data-focus="shopping"] path[data-k]:not([data-k="shopping"]) { stroke-opacity: .07; }
+.clock-a[data-focus="leisure"] path[data-k]:not([data-k="leisure"]) { stroke-opacity: .07; }
+.clock-a[data-focus="sleep"] path[data-k]:not([data-k="sleep"]) { stroke-opacity: .07; }
+
+
+/* Day / Week / Month */
+.hero-art-a { position: relative; }
+.clock-tabs { position: absolute; left: 0; top: -6px; z-index: 7; }
+.clock-tabs .tab { padding: 7px 12px; font-size: 12.5px; }
+.clock-a .layer { transition: opacity .45s ease; }
+.clock-a .layer-week, .clock-a .layer-day { opacity: 0; pointer-events: none; }
+.clock-a[data-mode="week"] .layer-week, .clock-a[data-mode="day"] .layer-day { opacity: 1; }
+.clock-a[data-mode="week"] .layer-all, .clock-a[data-mode="day"] .layer-all { opacity: 0; }
+.clock-a .glow, .clock-a .wk { transition: opacity .45s ease; }
+.clock-a:not([data-mode="month"]) .glow, .clock-a:not([data-mode="month"]) .wk { opacity: 0; }
+.clock-a .wl { font: 500 9.5px/1 var(--f-mono); fill: var(--ink-3); paint-order: stroke; stroke: #FBF8F2; stroke-width: 3px; stroke-linejoin: round; }
+.clock-a .dl { font: 700 11.5px/1 var(--f-head); fill: #FFFFFF; letter-spacing: .01em; pointer-events: none; }
+.clock-a[data-focus="wake"] .layer-week path[data-k]:not([data-k="wake"]), .clock-a[data-focus="wake"] .layer-day path[data-k]:not([data-k="wake"]) { stroke-opacity: .1; }
+.clock-a[data-focus="transit"] .layer-week path[data-k]:not([data-k="transit"]), .clock-a[data-focus="transit"] .layer-day path[data-k]:not([data-k="transit"]) { stroke-opacity: .1; }
+.clock-a[data-focus="work"] .layer-week path[data-k]:not([data-k="work"]), .clock-a[data-focus="work"] .layer-day path[data-k]:not([data-k="work"]) { stroke-opacity: .1; }
+.clock-a[data-focus="food"] .layer-week path[data-k]:not([data-k="food"]), .clock-a[data-focus="food"] .layer-day path[data-k]:not([data-k="food"]) { stroke-opacity: .1; }
+.clock-a[data-focus="exercise"] .layer-week path[data-k]:not([data-k="exercise"]), .clock-a[data-focus="exercise"] .layer-day path[data-k]:not([data-k="exercise"]) { stroke-opacity: .1; }
+.clock-a[data-focus="shopping"] .layer-week path[data-k]:not([data-k="shopping"]), .clock-a[data-focus="shopping"] .layer-day path[data-k]:not([data-k="shopping"]) { stroke-opacity: .1; }
+.clock-a[data-focus="leisure"] .layer-week path[data-k]:not([data-k="leisure"]), .clock-a[data-focus="leisure"] .layer-day path[data-k]:not([data-k="leisure"]) { stroke-opacity: .1; }
+.clock-a[data-focus="sleep"] .layer-week path[data-k]:not([data-k="sleep"]), .clock-a[data-focus="sleep"] .layer-day path[data-k]:not([data-k="sleep"]) { stroke-opacity: .1; }
+
+
+/* faces and Jarvis card per scale */
+.clock-wrap [data-scale] { transition: opacity .35s ease, visibility 0s linear 0s; }
+.clock-wrap[data-mode="day"] [data-scale]:not([data-scale="day"]),
+.clock-wrap[data-mode="week"] [data-scale]:not([data-scale="week"]),
+.clock-wrap[data-mode="month"] [data-scale]:not([data-scale="month"]) { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .25s ease, visibility 0s linear .25s; }
+.jv-say .st-p { font-size: 12.5px; line-height: 1.45; color: var(--ink); }
+.jv-say .st-t.cdt { color: var(--cdt); }
+
+/* hero balance: a smaller dial, a fuller left column */
+@media (min-width: 961px) { .hero-grid { grid-template-columns: 1.14fr .86fr; gap: 48px; } }  /* below 960px style.css stacks the hero */
+.hero-grid > * { min-width: 0; }
+.hero-art .clock-wrap { max-width: 430px; }
+.clock-tabs { left: -4px; top: -4px; }
+
+/* tabs sit outside the dial, top right; the Jarvis card moves to the free quadrant of each scale */
+.clock-tabs { left: auto; right: -6px; top: -10px; }
+.jv-say[data-scale] { width: 38%; }
+.jv-say[data-scale="day"] { left: 58%; top: 25%; }
+.jv-say[data-scale="week"] { left: 57%; top: 13%; }
+.jv-say[data-scale="month"] { left: 8%; top: 60%; width: 40%; border-radius: 16px 16px 16px 4px; }
+.jv-say[data-scale="day"] { left: 60%; top: 22%; width: 36%; }
+.jv-say[data-scale="day"] { left: 9%; top: 58%; width: 38%; border-radius: 16px 16px 16px 4px; }
+.moment.rgt .mc { transform: translateX(calc(-50% + 44px)); }  /* faces at the right edge: the label ends just past the face */
+/* phones: smaller faces and labels so the dial keeps its proportions */
+@media (max-width: 620px) {
+  .hero .pill { font-size: 10.5px; letter-spacing: .02em; }
+  .moment .mb { width: 58px; height: 58px; }
+  .moment .mc { font-size: 10.5px; padding: 3px 8px 3px 7px; }
+  .moment .mt { font-size: 9.5px; margin-right: 4px; }
+  .moment .md { margin-left: 5px; padding-left: 5px; }
+  .moment.rgt .mc { transform: translateX(calc(-50% + 34px)); }
+  .moment.lft .mc { transform: translateX(16px); }
+  .jv-say { padding: 9px 10px 10px; font-size: 11.5px; }
+  .jv-say b { letter-spacing: .04em; font-size: 9.5px; }
+  .hero-art { width: 100%; }
+}
+.hero { overflow-x: clip; }  /* the right-edge face buttons are wider than their labels; never let them widen the page */
+
+/* legend: eight sub-dials (assets/page-home.js). Photos: assets/photos/<key>.webp, Wikimedia Commons */
+.clock-legend.sub { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px 6px; max-width: 440px; margin: 12px auto 0; }
+.clock-legend.sub .lg { display: grid; justify-items: center; align-content: start; gap: 1px; padding: 6px 4px 7px; border: 1px solid transparent; border-radius: 16px;
+  background: none; font: inherit; color: inherit; cursor: pointer; transition: background .2s, border-color .2s, box-shadow .2s; }
+.clock-legend.sub .lg:hover, .clock-legend.sub .lg.on { background: var(--paper); border-color: var(--line); box-shadow: 0 6px 18px rgba(35, 33, 30, .06); }
+.clock-legend.sub .lg[aria-pressed="true"] { border-color: color-mix(in srgb, var(--c) 45%, var(--line)); }
+.clock-legend.sub .lg:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(47, 127, 150, .3); }
+.clock-legend.sub .sd { display: block; width: 54px; height: 54px; margin-bottom: 4px; overflow: visible; }
+.clock-legend.sub .sd .trk { fill: none; stroke: #F1ECE3; }
+.clock-legend.sub .sd .ix line { stroke: rgba(35, 33, 30, .35); stroke-width: .8; stroke-linecap: round; }
+.clock-legend.sub .sd .pbg { fill-opacity: .25; }
+.clock-legend.sub .sd image { filter: saturate(.8) contrast(1.04) brightness(1.02); }
+.clock-legend.sub .sd .prim { fill: none; stroke: #FFFFFF; stroke-width: 1.6; }
+.clock-legend.sub .lg:hover .sd .prim, .clock-legend.sub .lg.on .sd .prim { stroke: var(--paper); }
+.clock-legend.sub .nm { font: 600 12.5px/1.2 var(--f-body); color: var(--ink); letter-spacing: -.005em; }
+.clock-legend.sub .hr { font: 500 11px/1.2 var(--f-mono); color: var(--ink-2); white-space: nowrap; }
+.clock-legend.sub .hr small { font-size: 10px; color: var(--ink-3); }
+@media (max-width: 620px) {
+  .clock-legend.sub { gap: 2px 2px; }
+  .clock-legend.sub .sd { width: 52px; height: 52px; }
+  .clock-legend.sub .nm { font-size: 12px; }
+}

@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tasks · JARVIS-Bench</title>
+<meta name="description" content="JARVIS-Bench evaluates personal intelligence agents on 28 to 44 days of real users' daily traces: implicit preferences, proactive help, emotion, and cross-domain transfer. NeurIPS 2026 Evaluations & Datasets Track.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/page-tasks.css">
+</head>
+<body class="page-tasks">
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-paper" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V5.5M4.5 12v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V12"/></g></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 5.5V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h.5"/></g></symbol>
+  <symbol id="i-img" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/></g></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html"><img src="assets/mark-sm.svg" alt=""><span>JARVIS<span class="b2">-Bench</span></span></a>
+    <nav class="nav-links">
+      <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="dataset.html">Dataset</a>
+      <a href="tasks.html" class="active">Tasks</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-sm" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Code</a>
+      <a class="btn btn-sm btn-primary" href="https://openreview.net/forum?id=yGQt9wAGkS"><svg><use href="#i-paper"/></svg>Paper</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tk-i-text" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="tk-i-photo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M21 15.5l-4.5-4.5-8 8"/></g></symbol>
+</svg>
+
+<section class="section first" id="tasks">
+  <div class="container">
+    <div class="section-head tk-head">
+      <span class="eyebrow">Four tasks</span>
+      <h2>Four decisions, one trajectory</h2>
+      <p class="intro">A personal agent has to know what the user prefers, when to step in, how the user feels, and whether a preference carries over to a new domain. JARVIS-Bench turns each decision into a task. All four read the same trajectory through one event iterator; they differ only in which events are the targets and which label from the participant is the answer.</p>
+    </div>
+
+    <nav class="tk-decisions" aria-label="The four tasks">
+      <a class="tk-dec tk-c-ipr" href="#implicit-preference">
+        <span class="tk-dec-no">01</span>
+        <span class="tk-dec-q">What does the user&nbsp;prefer?</span>
+        <span class="tk-dec-t">Implicit Preference Reasoning</span>
+        <span class="tk-dec-k">Answer key: 100 survey answers</span>
+        <svg class="tk-dec-arrow" width="16" height="16"><use href="#i-down"/></svg>
+      </a>
+      <a class="tk-dec tk-c-pro" href="#proactive-help">
+        <span class="tk-dec-no">02</span>
+        <span class="tk-dec-q">Should the agent step&nbsp;in&nbsp;now?</span>
+        <span class="tk-dec-t">Proactive Help Prediction</span>
+        <span class="tk-dec-k">Answer key: the user's agentHelp flag</span>
+        <svg class="tk-dec-arrow" width="16" height="16"><use href="#i-down"/></svg>
+      </a>
+      <a class="tk-dec tk-c-emo" href="#emotion-aware">
+        <span class="tk-dec-no">03</span>
+        <span class="tk-dec-q">How does the user&nbsp;feel?</span>
+        <span class="tk-dec-t">Emotion-Aware Modeling</span>
+        <span class="tk-dec-k">Answer key: the user's mood keywords</span>
+        <svg class="tk-dec-arrow" width="16" height="16"><use href="#i-down"/></svg>
+      </a>
+      <a class="tk-dec tk-c-cdt" href="#cross-domain">
+        <span class="tk-dec-no">04</span>
+        <span class="tk-dec-q">Does a preference carry&nbsp;over?</span>
+        <span class="tk-dec-t">Cross-Domain Transfer</span>
+        <span class="tk-dec-k">Answer key: the same survey, one domain removed or kept</span>
+        <svg class="tk-dec-arrow" width="16" height="16"><use href="#i-down"/></svg>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<section class="section" id="shared-input">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Shared input</span>
+      <h2>One record, read four ways</h2>
+      <p class="intro">Every task starts from the same longitudinal record: the day-indexed events of one participant under a single typed schema. One event iterator walks it; each task picks its own target events and checks the answer against a label the participant gave.</p>
+    </div>
+
+    <div class="tk-fan">
+      <div class="tk-traj">
+        <div class="tk-traj-head">
+          <div class="tk-peeps" aria-hidden="true">
+            <img src="assets/peeps/tk-1.svg" alt="" width="40" height="40">
+            <img src="assets/peeps/tk-2.svg" alt="" width="40" height="40">
+            <img src="assets/peeps/tk-3.svg" alt="" width="40" height="40">
+          </div>
+          <div><b>One trajectory per participant</b><span>Day-indexed events, 28 to 44 days, about&nbsp;440&nbsp;events</span></div>
+        </div>
+
+        <div class="tk-days" aria-label="Schematic of a trajectory: each column is one day, each dot one event">
+          <div class="tk-day"><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="s"></i><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="a"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="s"></i><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i><i class="a"></i></div>
+          <div class="tk-day"><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="a"></i><i class="s"></i><i class="a"></i><i class="s"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="s"></i><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day gap"><i></i><i></i><i></i></div>
+          <div class="tk-day"><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i><i class="a"></i></div>
+          <div class="tk-day"><i class="s"></i><i class="a"></i><i class="s"></i><i class="a"></i><i class="s"></i></div>
+          <div class="tk-day"><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i><i class="s"></i><i class="s"></i><i class="a"></i></div>
+        </div>
+        <div class="tk-axis"><span>Day 1</span><span>Day 28 to 44</span></div>
+
+        <div class="tk-legend">
+          <div><i class="a"></i><span><b>Anchor event.</b> The participant's own entry, kept verbatim</span></div>
+          <div><i class="s"></i><span><b>Synthetic event.</b> Planted around the anchors, so preferences appear only as behaviour</span></div>
+        </div>
+
+        <div class="tk-given">
+          <div class="tk-given-k">The participant also gave</div>
+          <div class="tk-chips">
+            <span class="tk-chip">Persona and self-description</span>
+            <span class="tk-chip">100-question survey</span>
+            <span class="tk-chip">agentHelp flag and reason</span>
+            <span class="tk-chip">Mood keywords</span>
+            <span class="tk-chip">Photographs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tk-gutter"></div>
+
+      <div class="tk-spine"><span>One event iterator</span></div>
+
+      <div class="tk-gutter"></div>
+
+      <div class="tk-outs">
+        <a class="tk-row tk-c-ipr" href="#implicit-preference">
+          <span class="tk-row-no">01</span>
+          <div>
+            <b>Implicit Preference Reasoning</b>
+            <div class="tk-row-spec"><span class="k">Input</span><span>The whole trajectory at one of five memory levels, C0&nbsp;to&nbsp;C4</span><span class="k">Answer key</span><span>The participant's 100 survey answers</span></div>
+          </div>
+        </a>
+        <a class="tk-row tk-c-pro" href="#proactive-help">
+          <span class="tk-row-no">02</span>
+          <div>
+            <b>Proactive Help Prediction</b>
+            <div class="tk-row-spec"><span class="k">Input</span><span>All history before the day, then one anchor event, as text or photo</span><span class="k">Answer key</span><span>The participant's agentHelp flag and agentHelpReason</span></div>
+          </div>
+        </a>
+        <a class="tk-row tk-c-emo" href="#emotion-aware">
+          <span class="tk-row-no">03</span>
+          <div>
+            <b>Emotion-Aware Modeling</b>
+            <div class="tk-row-spec"><span class="k">Input</span><span>Prior days and the same day so far, then one anchor event, as text or photo</span><span class="k">Answer key</span><span>The participant's moodKeywords and their polarity</span></div>
+          </div>
+        </a>
+        <a class="tk-row tk-c-cdt" href="#cross-domain">
+          <span class="tk-row-no">04</span>
+          <div>
+            <b>Cross-Domain Transfer</b>
+            <div class="tk-row-spec"><span class="k">Input</span><span>The trajectory with one lifestyle domain removed (S1) or kept alone (S2)</span><span class="k">Answer key</span><span>The same 100 survey answers</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="task-cards">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Task by task</span>
+      <h2>Input, question, answer key, metric</h2>
+      <p class="intro">Each block reads the same way: what the model sees, what it is asked, who provides the answer, and how it is scored. The examples reuse the text of Figure 2 in the paper.</p>
+    </div>
+
+    <!-- 1 · Implicit Preference Reasoning -->
+    <article class="tk-task tk-c-ipr" id="implicit-preference">
+      <header class="tk-task-head">
+        <span class="tk-task-num" aria-label="Task 1">01</span>
+        <div class="tk-task-title">
+          <h3>Implicit Preference Reasoning</h3>
+          <p>What does the user prefer?</p>
+        </div>
+        <div class="tk-pool"><div class="tk-stat"><b>42</b><span>users</span></div><div class="tk-stat"><b>100</b><span>questions each</span></div><div class="tk-stat"><b>54</b><span>models</span></div></div>
+      </header>
+      <div class="tk-task-body">
+        <ol class="tk-spec">
+          <li>
+            <span class="tk-spec-k">Input</span>
+            <div class="tk-spec-v">User memory at one of five levels, from no context to lifelong memory.
+              <div class="tk-mini-ladder"><a href="#ladder">C0</a><a href="#ladder">C1</a><a href="#ladder">C2</a><a href="#ladder">C3</a><a href="#ladder">C4</a></div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Question</span>
+            <div class="tk-spec-v">Each of the 100 survey questions. The model picks one option; abstaining scores zero.
+              <div class="tk-opts"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Answer key</span>
+            <div class="tk-spec-v"><b>The participant.</b> Their own 100 survey answers across 8 lifestyle domains.</div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Metric</span>
+            <div class="tk-spec-v"><b>Accuracy.</b> Random guessing scores 25%. Also split by lifestyle domain, clue difficulty, clue type, and planted versus unplanted evidence.</div>
+          </li>
+        </ol>
+
+        <div class="tk-ex">
+          <div class="tk-ex-head"><span class="tk-ex-tag">Example</span><span class="tk-ex-src">Text from Figure 2 of the paper</span></div>
+          <!-- Scene: stand-in photograph from Wikimedia Commons (credits in assets/photos/CREDITS.md), shown as a duotone in the task colour -->
+          <figure class="tk-shot">
+            <div class="tk-shot-im" title="Stand-in photograph: Krzysztof Popławski, Wikimedia Commons, CC BY-SA 4.0"><img src="assets/photos/tasks-walk.webp" alt="" width="1400" height="932"><span class="tk-shot-cr">Stand-in photo · Wikimedia Commons</span></div>
+            <figcaption><span class="tk-shot-k">Scenario</span><p>The user asks for an exercise suggestion after work.</p></figcaption>
+          </figure>
+          <div class="tk-ex-k">Episodes in the trajectory</div>
+          <div class="tk-eps">
+            <div class="tk-ep"><b>EP1</b><span>Long lab meeting → skipped gym → 25-min campus walk.</span></div>
+            <div class="tk-ep"><b>EP2</b><span>Intense workouts → weekends, not weekday evenings.</span></div>
+            <div class="tk-ep"><b>EP3</b><span>Evening HIIT after work → “too drained.”</span></div>
+            <div class="tk-ep"><b>EP4</b><span>Deadline stress → light outdoor walk → “clear my head.”</span></div>
+          </div>
+          <div class="tk-infer"><span class="tk-ex-k">Jarvis infers</span>The user likely prefers light evening activity over intense workouts after a long workday.</div>
+          <div class="tk-chat">
+            <div class="tk-msg"><span class="tk-who">Jarvis</span><div class="b">“You may prefer a light evening walk instead of a high-intensity gym session. It seems to fit your after-work routine better.”</div></div>
+            <div class="tk-msg user"><span class="tk-who">User</span><div class="b">“That sounds good. Start a walking route.”</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- What the benchmark found. Numbers: per-level means and best models are computed in assets/page-tasks.js from window.JB_DATA.ipr
+           (assets/data.js = Appendix D tab:matrix-a / tab:matrix-b, 54 models). The 34.8 to 47.2 step and the 3.5-point persona gain are
+           Section 4 Finding 1; the 73.2 ceiling and "more than a quarter of questions incorrect" are Finding 2 (Sections/05_Discussion.tex). -->
+      <div class="tk-find">
+        <div class="tk-find-head">
+          <span class="tk-find-k">What the benchmark found</span>
+          <h4>Behaviour carries most of the gain, and even lifelong memory tops out at 73.2%</h4>
+          <p>Averaged over the 54 models, going from No Memory to the Long Trajectory adds 12.4 points (34.8% to 47.2%); the persona profile adds 3.5 more. With trajectory, persona and the survey insight together, the best model, GPT-6-Astra, still gets more than a quarter of the questions wrong.</p>
+        </div>
+        <div class="tk-viz" id="viz-ladder"></div>
+        <p class="tk-find-src">One dot per model, the black tick is the mean of the 54. The full per-model table is on the <a href="index.html#leaderboard">leaderboard</a>.</p>
+      </div>
+    </article>
+
+    <!-- 2 · Proactive Help Prediction -->
+    <article class="tk-task tk-c-pro" id="proactive-help">
+      <header class="tk-task-head">
+        <span class="tk-task-num" aria-label="Task 2">02</span>
+        <div class="tk-task-title">
+          <h3>Proactive Help Prediction</h3>
+          <p>Should the agent step in now?</p>
+        </div>
+        <div class="tk-pool"><div class="tk-stat"><b>254</b><span>anchor events</span></div><div class="tk-stat"><b>15</b><span>users</span></div><div class="tk-stat"><b>111</b><span>marked “needs help”</span></div></div>
+      </header>
+      <div class="tk-task-body">
+        <ol class="tk-spec">
+          <li>
+            <span class="tk-spec-k">Input</span>
+            <div class="tk-spec-v">All of the user's history before the anchor's day, then the anchor event itself.
+              <div class="tk-modes"><span><svg><use href="#tk-i-text"/></svg>as text</span><span class="or">or</span><span><svg><use href="#tk-i-photo"/></svg>as its photograph</span></div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Question</span>
+            <div class="tk-spec-v">Would the user benefit from help at this moment? Yes or no, plus a free-text rationale.
+              <div class="tk-opts"><span>Help now</span><span>Not now</span></div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Answer key</span>
+            <div class="tk-spec-v"><b>The participant.</b> The <code>agentHelp</code> flag they set on that event (0 or 1) and their <code>agentHelpReason</code>.</div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Metric</span>
+            <div class="tk-spec-v"><b>F1</b> on the flag and <b>rationale match rate</b> (RMR) on the reason, each reported per user (macro) and pooled over anchors (micro).</div>
+          </li>
+        </ol>
+
+        <div class="tk-ex">
+          <div class="tk-ex-head"><span class="tk-ex-tag">Example</span><span class="tk-ex-src">Text from Figure 2 of the paper</span></div>
+          <!-- Scene: stand-in photograph from Wikimedia Commons (credits in assets/photos/CREDITS.md); participants' own photographs are not shown -->
+          <figure class="tk-shot">
+            <div class="tk-shot-im" title="Stand-in photograph: kishjar?, Wikimedia Commons, CC BY 4.0, cropped"><img src="assets/photos/tasks-rain.webp" alt="" width="1400" height="539"><span class="tk-shot-cr">Stand-in photo · Wikimedia Commons</span></div>
+            <figcaption><span class="tk-shot-k">Anchor event, photo described</span><p>User standing outside in the rain with grocery bags, wet clothes, and no umbrella.</p></figcaption>
+          </figure>
+          <div class="tk-notes two">
+            <div class="tk-infer"><span class="tk-ex-k">From the past</span>Rainy errands with heavy bags often led user to request transportation help or choose fastest route home.</div>
+            <div class="tk-infer"><span class="tk-ex-k">Likely need</span>Immediate assistance with getting home safely and minimizing exposure to rain.</div>
+          </div>
+          <div class="tk-chat">
+            <div class="tk-msg"><span class="tk-who">Jarvis</span><div class="b">“It looks like the weather changed while you were shopping, and you’re carrying several bags without an umbrella. Would you like me to call a ride home or find the fastest covered route?”</div></div>
+            <div class="tk-msg user"><span class="tk-who">User</span><div class="b">“Good idea. Please call a ride.”</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- What the benchmark found. Numbers: the pool of 254 anchors with 111 positive and 143 negative over 15 users is Section 4
+           (Proactive Help protocol, Sections/04_Result.tex) and Appendix N sec:app-val-selection; per-user versus pooled F1 for the ten
+           models is tab:proactive (assets/data.js); the up-to-forty-point gap is computed from those values (Qwen3.6-Plus: 26.8 vs 66.4). -->
+      <div class="tk-find">
+        <div class="tk-find-head">
+          <span class="tk-find-k">What the benchmark found</span>
+          <h4>Two aggregates of the same pool can sit forty points apart</h4>
+          <p>The participants flagged 111 of the 254 anchors as moments to step in. Anchors are spread unevenly over the 15 users, so a model's per-user mean F1 and its pooled F1 can differ by up to forty points. The paper therefore reports both for every model.</p>
+        </div>
+        <div class="tk-viz-grid">
+          <div>
+            <div class="tk-viz-t">The pool<small>254 anchor events with a photograph and a reason, from 15 users</small></div>
+            <div class="tk-viz" id="viz-waffle"></div>
+          </div>
+          <div>
+            <div class="tk-viz-t">Per-user mean versus pooled F1, text input<small>Ten models, sorted by pooled F1</small></div>
+            <div class="tk-viz" id="viz-dumbbell"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 · Emotion-Aware Modeling -->
+    <article class="tk-task tk-c-emo" id="emotion-aware">
+      <header class="tk-task-head">
+        <span class="tk-task-num" aria-label="Task 3">03</span>
+        <div class="tk-task-title">
+          <h3>Emotion-Aware Modeling</h3>
+          <p>How does the user feel?</p>
+        </div>
+        <div class="tk-pool"><div class="tk-stat"><b>123</b><span>events</span></div><div class="tk-stat"><b>15</b><span>users</span></div><div class="tk-stat"><b>78 · 22 · 23</b><span>positive · negative · mixed</span></div></div>
+      </header>
+      <div class="tk-task-body">
+        <ol class="tk-spec">
+          <li>
+            <span class="tk-spec-k">Input</span>
+            <div class="tk-spec-v">All prior days plus the earlier events of the same day, then the target event from the user's last five logged days.
+              <div class="tk-modes"><span><svg><use href="#tk-i-text"/></svg>as text</span><span class="or">or</span><span><svg><use href="#tk-i-photo"/></svg>as its photograph</span></div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Question</span>
+            <div class="tk-spec-v">One polarity label and any number of mood keywords.
+              <div class="tk-opts"><span>Positive</span><span>Negative</span><span>Mixed</span></div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Answer key</span>
+            <div class="tk-spec-v"><b>The participant.</b> The <code>moodKeywords</code> they wrote on that event, and the polarity derived from them.</div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Metric</span>
+            <div class="tk-spec-v"><b>Polarity accuracy</b> (three classes) and <b>mood-F1</b> (multi-label), each per user and pooled over events.</div>
+          </li>
+        </ol>
+
+        <div class="tk-ex">
+          <div class="tk-ex-head"><span class="tk-ex-tag">Example</span><span class="tk-ex-src">Text from Figure 2 of the paper</span></div>
+          <!-- Scene: stand-in photograph from Wikimedia Commons (credits in assets/photos/CREDITS.md); participants' own photographs are not shown -->
+          <figure class="tk-shot">
+            <div class="tk-shot-im" title="Stand-in photograph: Jay Wennington, Wikimedia Commons, CC0"><img src="assets/photos/tasks-night.webp" alt="" width="1400" height="934"><span class="tk-shot-cr">Stand-in photo · Wikimedia Commons</span></div>
+            <figcaption><span class="tk-shot-k">Target event, photo described</span><p>A late-night desk photo with coffee, an open laptop, scattered notes, and a tired posture under dim desk light.</p></figcaption>
+          </figure>
+          <div class="tk-notes two">
+            <div class="tk-infer"><span class="tk-ex-k">From the past</span>This scenario appears when user feels deadline pressure and mental fatigue.</div>
+            <div class="tk-infer"><span class="tk-ex-k">Likely state</span>Stressed, tired, but relieved to be making progress.</div>
+          </div>
+          <div class="tk-chat">
+            <div class="tk-msg"><span class="tk-who">Jarvis</span><div class="b">“This looks like one of those long, stressful nights. You seem tired but still pushing through. I’m here with you. Take a breath, and let’s slow it down for a moment.”</div></div>
+            <div class="tk-msg user"><span class="tk-who">User</span><div class="b">“Thanks. I really needed that.”</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- What the benchmark found. Numbers: 123 events = 78 positive, 22 negative, 23 mixed (Section 4, Emotion-Aware protocol; Appendix N);
+           pooled polarity accuracy and mood-F1 for the ten models with text and photograph input are tab:emotion (assets/data.js); the 41.1
+           mood-F1 ceiling and "polarity is partly saturated" are Section 4.3 Findings 1 and 2 (Sections/05_Discussion.tex). -->
+      <div class="tk-find">
+        <div class="tk-find-head">
+          <span class="tk-find-k">What the benchmark found</span>
+          <h4>Polarity is partly saturated; the mood vocabulary is not</h4>
+          <p>The pooled polarity accuracy of the ten models sits between 54% and 70% for every model except Qwen3.5-9B on photographs, against a chance level of 33%. Recovering the participant's own mood words is harder: the best pooled mood-F1 is 41.1%, so mood-F1 is the metric that still separates models.</p>
+        </div>
+        <div class="tk-viz-grid">
+          <div>
+            <div class="tk-viz-t">The pool<small>123 anchor events from the users' last five logged days</small></div>
+            <div class="tk-viz" id="viz-split"></div>
+          </div>
+          <div>
+            <div class="tk-viz-t">Where the ten models land<small>Pooled over the 123 events, text and photograph input</small></div>
+            <div class="tk-viz" id="viz-strips"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 · Cross-Domain Transfer -->
+    <article class="tk-task tk-c-cdt" id="cross-domain">
+      <header class="tk-task-head">
+        <span class="tk-task-num" aria-label="Task 4">04</span>
+        <div class="tk-task-title">
+          <h3>Cross-Domain Transfer</h3>
+          <p>Does a preference carry over to another lifestyle domain?</p>
+        </div>
+        <div class="tk-pool"><div class="tk-stat"><b>7</b><span>ablation domains</span></div><div class="tk-stat"><b>3</b><span>GPT-5 sizes</span></div><div class="tk-stat"><b>1,764</b><span>runs</span></div></div>
+      </header>
+      <div class="tk-task-body">
+        <ol class="tk-spec">
+          <li>
+            <span class="tk-spec-k">Input</span>
+            <div class="tk-spec-v">The long trajectory with one lifestyle domain taken out, or with only that domain kept.
+              <div class="tk-abl">
+                <div class="tk-abl-row"><span class="tk-abl-k">S1 drop-one</span><div class="tk-doms"><i></i><i></i><i></i><i class="off"></i><i></i><i></i><i></i></div></div>
+                <div class="tk-abl-row"><span class="tk-abl-k">S2 keep-only</span><div class="tk-doms"><i class="off"></i><i class="off"></i><i class="off"></i><i></i><i class="off"></i><i class="off"></i><i class="off"></i></div></div>
+                <div class="tk-abl-note">Each square is one of the 7 lifestyle domains</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Question</span>
+            <div class="tk-spec-v">The full 100-question survey again, scored on the questions of the same domain that was removed or kept.</div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Answer key</span>
+            <div class="tk-spec-v"><b>The participant.</b> The same 100 survey answers.</div>
+          </li>
+          <li>
+            <span class="tk-spec-k">Metric</span>
+            <div class="tk-spec-v"><b>Change in same-domain accuracy</b> relative to C2 for S1 and to C0 for S2. The S1 diagonal was also reproduced on Qwen3.6-27B and Gemma-4-31B.</div>
+          </li>
+        </ol>
+
+        <div class="tk-ex">
+          <div class="tk-ex-head"><span class="tk-ex-tag">Example</span><span class="tk-ex-src">Text from Figure 2 of the paper</span></div>
+          <!-- Scene: stand-in photograph from Wikimedia Commons (credits in assets/photos/CREDITS.md), shown as a duotone in the task colour -->
+          <figure class="tk-shot">
+            <div class="tk-shot-im" title="Stand-in photograph: Sgerbic, Wikimedia Commons, CC BY-SA 4.0"><img src="assets/photos/tasks-gallery.webp" alt="" width="1400" height="935"><span class="tk-shot-cr">Stand-in photo · Wikimedia Commons</span></div>
+            <figcaption><span class="tk-shot-k">Scenario</span><p>The user asks for a weekend activity suggestion.</p></figcaption>
+          </figure>
+          <div class="tk-ex-k">Episodes across domains</div>
+          <div class="tk-eps">
+            <div class="tk-ep"><b>EP1</b><span>Small room → focused writing. Avoided open office.</span></div>
+            <div class="tk-ep"><b>EP2</b><span>Crowded theater → skipped. Watched at home.</span></div>
+            <div class="tk-ep"><b>EP3</b><span>Large event → left early. Small dinner → stayed longer.</span></div>
+            <div class="tk-ep"><b>EP4</b><span>Peak hours → delayed trip. Late evening → quieter store.</span></div>
+          </div>
+          <div class="tk-infer"><span class="tk-ex-k">Jarvis infers</span>The user prefers quiet, low-crowd environments across daily activities.</div>
+          <div class="tk-chat">
+            <div class="tk-msg"><span class="tk-who">Jarvis</span><div class="b">“You may enjoy a quiet museum visit or a lakeside walk more than a crowded downtown festival.”</div></div>
+            <div class="tk-msg user"><span class="tk-who">User</span><div class="b">“I like that. Plan the museum visit.”</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- What the benchmark found. Numbers: the S1 drop-one diagonal for GPT-5 (mean of three sizes), Qwen3.6-27B and Gemma-4-31B is
+           Appendix N tab:cdt-families (drawn by assets/page-tasks.js); the S2 keep-only values, leisure +20.8 and food_dining +8.9 / +4.0 / +2.6
+           by GPT-5 size, are Section 4.3 Findings 1 and 3 (Sections/05_Discussion.tex); the event subdomains per domain are Appendix B tab:domain-mapping. -->
+      <div class="tk-find">
+        <div class="tk-find-head">
+          <span class="tk-find-k">What the benchmark found</span>
+          <h4>Leisure is both the most necessary and the most self-sufficient domain</h4>
+          <p>Remove one domain's events from the long trajectory and ask that domain's questions again. Without leisure, same-domain accuracy falls by 12.8 points averaged over the three GPT-5 sizes, by 15.5 on Qwen3.6-27B and by 10.5 on Gemma-4-31B; without the daily routine it falls by under two points (0.7, 1.8 and 0.4). Kept on its own, leisure lifts same-domain accuracy by 20.8 points over No Memory.</p>
+        </div>
+        <div class="tk-viz-grid wide">
+          <div>
+            <div class="tk-viz-t">Drop one domain (S1)<small>Change in same-domain accuracy relative to the Long Trajectory, in points</small></div>
+            <div class="tk-viz" id="viz-s1"></div>
+          </div>
+          <div>
+            <div class="tk-viz-t">Keep only one domain (S2)<small>Change relative to No Memory, GPT-5 sizes</small></div>
+            <div class="tk-hero"><b>+20.8</b><span>points on leisure questions when only the <em>leisure</em> events are kept, mean of the three GPT-5 sizes</span></div>
+            <div class="tk-bars">
+              <div class="tk-bars-t">Food and dining kept, by model size<small>Smaller models extract less from a single domain</small></div>
+              <div class="tk-bar"><span>GPT-5</span><div class="t"><i style="width:35.6%"></i></div><b>+8.9</b></div>
+              <div class="tk-bar"><span>GPT-5-Mini</span><div class="t"><i style="width:16%"></i></div><b>+4.0</b></div>
+              <div class="tk-bar"><span>GPT-5-Nano</span><div class="t"><i style="width:10.4%"></i></div><b>+2.6</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="ladder">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">User memory</span>
+      <h2>Five levels of memory</h2>
+      <p class="intro">Implicit Preference Reasoning is run at five cumulative levels. Each step adds one kind of memory, so the gain from behaviour, from the persona, and from a distilled insight can be told apart.</p>
+    </div>
+
+    <div class="tk-ladder-card">
+      <ol class="tk-ladder">
+        <li class="tk-lv">
+          <div class="tk-stack">
+            <div class="tk-layer ghost">no survey insight</div>
+            <div class="tk-layer ghost">no persona</div>
+            <div class="tk-layer ghost">no trajectory</div>
+          </div>
+          <div class="tk-lv-dot"></div>
+          <div class="tk-lv-code">C0</div>
+          <h4 class="tk-lv-name">No Memory</h4>
+          <p class="tk-lv-desc">No user context at all.</p>
+          <div class="tk-lv-tag tk-c-cdt">S2 keep-only starts here</div>
+        </li>
+        <li class="tk-lv">
+          <div class="tk-stack">
+            <div class="tk-layer ghost">no survey insight</div>
+            <div class="tk-layer ghost">no persona</div>
+            <div class="tk-layer on trj"><i class="tk-sw"></i><div><span>First 14 days</span><i class="tk-track"><i style="width:32%"></i></i></div></div>
+          </div>
+          <div class="tk-lv-dot"></div>
+          <div class="tk-lv-code">C1</div>
+          <h4 class="tk-lv-name">Short Trajectory</h4>
+          <p class="tk-lv-desc">The first 14 days of the behavioural log.</p>
+          <div class="tk-lv-add">adds the early log</div>
+        </li>
+        <li class="tk-lv">
+          <div class="tk-stack">
+            <div class="tk-layer ghost">no survey insight</div>
+            <div class="tk-layer ghost">no persona</div>
+            <div class="tk-layer on trj"><i class="tk-sw"></i><div><span>All days</span><i class="tk-track"><i style="width:100%"></i></i></div></div>
+          </div>
+          <div class="tk-lv-dot"></div>
+          <div class="tk-lv-code">C2</div>
+          <h4 class="tk-lv-name">Long Trajectory</h4>
+          <p class="tk-lv-desc">The full trajectory, still without a persona.</p>
+          <div class="tk-lv-tag tk-c-cdt">S1 drop-one starts here</div>
+        </li>
+        <li class="tk-lv">
+          <div class="tk-stack">
+            <div class="tk-layer ghost">no survey insight</div>
+            <div class="tk-layer on per"><i class="tk-sw"></i><div><span>Persona profile</span></div></div>
+            <div class="tk-layer on trj"><i class="tk-sw"></i><div><span>All days</span><i class="tk-track"><i style="width:100%"></i></i></div></div>
+          </div>
+          <div class="tk-lv-dot"></div>
+          <div class="tk-lv-code">C3</div>
+          <h4 class="tk-lv-name">Persona Memory</h4>
+          <p class="tk-lv-desc">The full trajectory plus the participant's persona profile.</p>
+          <div class="tk-lv-add">adds the explicit profile</div>
+        </li>
+        <li class="tk-lv top">
+          <div class="tk-stack">
+            <div class="tk-layer on ins"><i class="tk-sw"></i><div><span>Survey insight</span></div></div>
+            <div class="tk-layer on per"><i class="tk-sw"></i><div><span>Persona profile</span></div></div>
+            <div class="tk-layer on trj"><i class="tk-sw"></i><div><span>All days</span><i class="tk-track"><i style="width:100%"></i></i></div></div>
+          </div>
+          <div class="tk-lv-dot"></div>
+          <div class="tk-lv-code">C4</div>
+          <h4 class="tk-lv-name">Lifelong Memory</h4>
+          <p class="tk-lv-desc">Trajectory, persona, and a distilled survey insight. An oracle-style ceiling.</p>
+          <div class="tk-lv-add">adds a deliberately vague insight</div>
+        </li>
+      </ol>
+      <div class="tk-ladder-foot">
+        <div><p><b>Why C4 is a ceiling, not a leak.</b> The survey insight is condensed and deliberately vague. It names no survey question or option, so even C4 has to combine it with the behavioural evidence.</p></div>
+        <div><p><b>The other tasks.</b> Proactive Help and Emotion-Aware Modeling do not use the ladder; they read all history before the target. Cross-Domain Transfer derives S1 from C2 and S2 from C0.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <div><b style="color:var(--ink)">JARVIS-Bench</b> · NeurIPS 2026 Evaluations &amp; Datasets Track</div>
+    <div>Data CC BY-NC 4.0 · Code MIT · <a href="https://github.com/AgentMemoryWorld/JARVIS-Bench">GitHub</a> · <a href="https://openreview.net/forum?id=yGQt9wAGkS">OpenReview</a></div>
+  </div>
+  <div class="container credits"><details><summary>Image credits</summary><p>Illustrations: Open Peeps by Pablo Stanley (CC0). Photographs from Wikimedia Commons, cropped, resized and colour-toned for this site; adaptations of CC BY-SA photographs are shared under the same licence. Institution and model logos are trademarks of their owners.</p><ul><li><a href="https://commons.wikimedia.org/wiki/File:Christchurch_art_gallery_interior.jpg">Christchurch art gallery interior</a> by Sgerbic, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Reading_mail_at_night_(Unsplash).jpg">Reading mail at night (Unsplash)</a> by Jay Wennington, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Late_autumn_rainy_night_in_Moscow_(54889230493).jpg">Late autumn rainy night in Moscow (54889230493)</a> by kishjar?, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Park_na_%C5%9Aroduli,_Sosnowiec,_Jesie%C5%84_2021.jpg">Park na Środuli, Sosnowiec, Jesień 2021</a> by Krzysztof Popławski, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li></ul></details></div>
+</footer>
+
+<div class="lightbox" id="lightbox"><div><img alt=""><div class="cap"></div></div></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/logos.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/page-tasks.js"></script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dataset · JARVIS-Bench</title>
+<meta name="description" content="JARVIS-Bench evaluates personal intelligence agents on 28 to 44 days of real users' daily traces: implicit preferences, proactive help, emotion, and cross-domain transfer. NeurIPS 2026 Evaluations & Datasets Track.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/page-dataset.css">
+</head>
+<body class="page-dataset">
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-paper" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V5.5M4.5 12v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V12"/></g></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 5.5V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h.5"/></g></symbol>
+  <symbol id="i-img" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/></g></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html"><img src="assets/mark-sm.svg" alt=""><span>JARVIS<span class="b2">-Bench</span></span></a>
+    <nav class="nav-links">
+      <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="dataset.html" class="active">Dataset</a>
+      <a href="tasks.html">Tasks</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-sm" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Code</a>
+      <a class="btn btn-sm btn-primary" href="https://openreview.net/forum?id=yGQt9wAGkS"><svg><use href="#i-paper"/></svg>Paper</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- Dataset page. Everything below is assembled by tools/build.py into dataset.html; styles live in assets/page-dataset.css. -->
+<section class="section first" id="data">
+  <div class="container">
+    <div class="ds-head">
+      <div>
+        <div class="ds-people top" aria-hidden="true"><div class="pp"><img src="assets/peeps/p1.svg" alt=""></div><div class="pp"><img src="assets/peeps/p2.svg" alt=""></div><div class="pp"><img src="assets/peeps/p3.svg" alt=""></div><div class="pp"><img src="assets/peeps/p4.svg" alt=""></div><div class="pp"><img src="assets/peeps/p5.svg" alt=""></div><div class="pp"><img src="assets/peeps/p6.svg" alt=""></div><div class="pp"><img src="assets/peeps/p7.svg" alt=""></div><div class="pp"><img src="assets/peeps/p8.svg" alt=""></div></div>
+        <span class="eyebrow">Dataset</span>
+        <h2>42 people, logged day&nbsp;by&nbsp;day</h2>
+        <p class="intro">Participants logged their own days through a custom mobile app for 28 to 44 days: wake-ups, meals, exercise, naps, bedtime, often with a photo and a mood note. Each released trajectory keeps those entries verbatim, wraps them in clue-planted synthetic events, and was confirmed by the participant.</p>
+        <div class="ds-actions">
+          <a class="btn btn-primary" href="https://doi.org/10.7910/DVN/8UKMK1"><svg><use href="#i-db"/></svg>Download the data</a>
+          <a class="btn" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Code and answer key</a>
+          <a class="btn" href="#release"><svg><use href="#i-down"/></svg>What is inside</a>
+        </div>
+      </div>
+      <div class="ds-card ds-ribbon-card">
+        <div class="ds-ribbon-top">
+          <div class="ds-card-title">One participant, one trajectory<span>one column per day, one square per event</span></div>
+          <span class="ds-tag">Illustration</span>
+        </div>
+        <div class="ds-ribbon"><svg viewBox="0 0 441 202" role="img" aria-label="Illustration: one participant, one column per day, one square per event; filled squares are anchor events, hollow squares synthetic events"><rect x="6.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="6" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="6.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="6.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="6" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="6.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="6.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="18.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="18.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="18.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="18.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="18.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="18" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="30.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="30" y="8" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="42" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="42.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="42" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="42" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="42.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="42" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="54" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="54" y="8" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="66" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="66.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="66.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="66.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="78.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="78" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="78" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="78" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="78.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="78" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="90" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="90.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="90.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="90.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="90" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="102.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="102" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="102.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="102" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="102.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="102" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="102" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="114" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="114" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="114.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="114.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="114.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="114.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="114" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="114.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="114" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="114" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="114" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="126" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="126" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="126.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="126.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="126" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="126.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="126" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="126.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="126.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="126.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="138.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="138.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="138.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="138.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="138" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="150.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="150.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="150" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="150.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="150.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="150" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="162.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="162.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="162" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="162" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="162" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="162.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="162" y="8" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="174.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="174" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="174" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="174.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="174.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="174" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="174.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="174.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="174.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="174" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="174" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="186.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="186.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="186" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="186.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="186" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="186" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="186" y="8" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="198.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="198" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="198.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="198" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="198" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="198.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="198" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="198.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="198" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="198.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="210" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="210.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="210" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="210" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="210" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="210.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="210.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="210" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="210" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="210.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="222" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="222.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="222.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="222" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="222.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="222" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="222.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="234" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="234" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="234" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="234" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="234" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="234.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="234.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="234.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="234.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="234.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="246.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="246.5" y="8.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="258" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="258.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="258" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="258" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="258" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="258" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="270.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="270" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="270.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="270" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="270" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="270.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="270" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="282.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="282.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="282.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="282" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="282" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="282.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="282" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="294" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="294" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="294" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="294.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="294" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="294.5" y="8.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="306.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="306.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="306.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="306" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="306" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="306.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="306" y="8" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="318.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="318" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="318" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="318" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="318.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="318.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="318" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="318" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="318.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="318" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="330" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="330.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="330" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="330.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="330.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="330.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="330" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="330" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="330" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="330.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="330.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="342" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="342" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="342.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="342.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="342" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="342" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="342" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="342.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="342" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="342.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="354.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="354" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="354" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="354.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="354" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="354" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="354.5" y="20.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="366.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="366" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="366.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="366" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="366" y="32" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="378.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="378" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="378" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="378.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="378.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378" y="44" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="378.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="378" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="390" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="390.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="390" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390" y="68" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="390.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="390.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="402" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="402.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="402" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="402.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402" y="80" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="402.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402.5" y="44.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402.5" y="32.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="402" y="20" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="402" y="8" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="414" y="164" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="414" y="152" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="414.5" y="140.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="414" y="128" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="414.5" y="116.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="414.5" y="104.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="414.5" y="92.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="414.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="414.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="414" y="56" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="426.5" y="164.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="426.5" y="152.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="426" y="140" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="426.5" y="128.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="426" y="116" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="426" y="104" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="426" y="92" width="9" height="9" rx="2" fill="#2F7F96"/><rect x="426.5" y="80.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="426.5" y="68.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><rect x="426.5" y="56.5" width="8" height="8" rx="2" fill="#F7F1E7" stroke="#DCD2C2"/><line x1="6" y1="178" x2="435" y2="178" stroke="#DDD4C5"/><line x1="10.5" y1="178" x2="10.5" y2="182" stroke="#CDBFA9"/><text x="6" y="195" text-anchor="start">Day 1</text><line x1="166.5" y1="178" x2="166.5" y2="182" stroke="#CDBFA9"/><text x="166.5" y="195" text-anchor="middle">Day 14</text><line x1="334.5" y1="178" x2="334.5" y2="182" stroke="#CDBFA9"/><text x="334.5" y="195" text-anchor="middle">Day 28</text><line x1="430.5" y1="178" x2="430.5" y2="182" stroke="#CDBFA9"/><text x="435" y="195" text-anchor="end">Day 36</text></svg></div>
+        <div class="ds-legend">
+          <span><i class="anc"></i><b>Anchor</b> the participant's own entry, verbatim</span>
+          <span><i class="syn"></i><b>Synthetic</b> clue-planted around the anchors</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-stats">
+      <div class="ds-stat"><div class="v">42</div><div class="k">participants released, of 70 enrolled</div></div>
+      <div class="ds-stat"><div class="v">28<small>–</small>44</div><div class="k">days logged per participant</div></div>
+      <div class="ds-stat"><div class="v"><small>~</small>440</div><div class="k">events per participant, about half anchor</div></div>
+      <div class="ds-stat"><div class="v">18,471</div><div class="k">events in the release, about 3.17M tokens</div></div>
+      <div class="ds-stat"><div class="v">12<small>→</small>8</div><div class="k">event subdomains into lifestyle domains</div></div>
+      <div class="ds-stat"><div class="v">100</div><div class="k">survey questions per participant</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collection">
+  <div class="container">
+
+    <div class="ds-kicker">Three checks before release</div>
+    <div class="ds-steps">
+      <div class="ds-card ds-step">
+        <div class="n">01</div>
+        <h3>Structural validator</h3>
+        <p>Automatic. Every anchor payload must equal the original log entry, time buckets must match the day skeleton, event counts must match, and synthetic text may not contain a calendar date, weekday name or 12-hour clock time.</p>
+        <span class="who">rule-based</span>
+      </div>
+      <div class="ds-card ds-step">
+        <div class="n">02</div>
+        <h3>Full-trajectory review</h3>
+        <p>An internal reviewer reads the whole trajectory and flags mood inconsistencies, narrative jumps and anchor–synthetic mismatches. Flagged users go back through expansion and are validated again.</p>
+        <span class="who">internal reviewer</span>
+      </div>
+      <div class="ds-card ds-step final">
+        <div class="n">03</div>
+        <h3>Participant fidelity confirmation</h3>
+        <p>The participant sees the assembled trajectory with their own entries highlighted and a random sample of synthetic events foregrounded, and says whether it still reads like a plausible stretch of their own life. No confirmation, no release.</p>
+        <span class="who">the participant</span>
+      </div>
+    </div>
+
+    <div class="ds-kicker">Who the 42 are</div>
+    <!-- participant diversity: Appendix L (L_Participant_Diversity.tex), caption of fig:participant-diversity. Region USA 75, Southeast Asia 9, Europe 5, China 5, Other 7;
+         language English 51, Chinese 40, Korean 3, Other 6; sleep bucket Deep night 69, Late night 22, Early morning 7, Other 2; productive period Afternoon 58, Morning 24, Evening 16, Other 2;
+         work style Hybrid 62, Independent 38; exercise goals Health 40, Stress relief 33, Fitness 19, Muscle gain 7, Other 2. Bases vary by axis (optional questions). -->
+    <div class="ds-card ds-div">
+      <div class="ds-div-head">
+        <div class="ds-card-title">Six self-reported persona axes<span>share of participants per answer; some questions were optional, so the base varies by axis</span></div>
+        <span class="ds-tag">Appendix L</span>
+      </div>
+      <div class="ds-axes">
+      <!-- gen:div_axes -->
+      <div class="ds-axis"><div class="ax-t">Region</div><div class="ax-bar" role="img" aria-label="Region: USA 75%, Southeast Asia 9%, Europe 5%, China 5%, Other 7%"><i class="s1" style="flex:75" title="USA 75%"></i><i class="s2" style="flex:9" title="Southeast Asia 9%"></i><i class="s3" style="flex:5" title="Europe 5%"></i><i class="s4" style="flex:5" title="China 5%"></i><i class="o" style="flex:7" title="Other 7%"></i></div><ul class="ax-lg"><li><i class="s1"></i>USA<b>75%</b></li><li><i class="s2"></i>Southeast Asia<b>9%</b></li><li><i class="s3"></i>Europe<b>5%</b></li><li><i class="s4"></i>China<b>5%</b></li><li><i class="o"></i>Other<b>7%</b></li></ul></div>
+      <div class="ds-axis"><div class="ax-t">Primary language</div><div class="ax-bar" role="img" aria-label="Primary language: English 51%, Chinese 40%, Korean 3%, Other 6%"><i class="s1" style="flex:51" title="English 51%"></i><i class="s2" style="flex:40" title="Chinese 40%"></i><i class="s3" style="flex:3" title="Korean 3%"></i><i class="o" style="flex:6" title="Other 6%"></i></div><ul class="ax-lg"><li><i class="s1"></i>English<b>51%</b></li><li><i class="s2"></i>Chinese<b>40%</b></li><li><i class="s3"></i>Korean<b>3%</b></li><li><i class="o"></i>Other<b>6%</b></li></ul></div>
+      <div class="ds-axis"><div class="ax-t">Typical sleep bucket</div><div class="ax-bar" role="img" aria-label="Typical sleep bucket: Deep night 69%, Late night 22%, Early morning 7%, Other 2%"><i class="s1" style="flex:69" title="Deep night 69%"></i><i class="s2" style="flex:22" title="Late night 22%"></i><i class="s3" style="flex:7" title="Early morning 7%"></i><i class="o" style="flex:2" title="Other 2%"></i></div><ul class="ax-lg"><li><i class="s1"></i>Deep night<b>69%</b></li><li><i class="s2"></i>Late night<b>22%</b></li><li><i class="s3"></i>Early morning<b>7%</b></li><li><i class="o"></i>Other<b>2%</b></li></ul></div>
+      <div class="ds-axis"><div class="ax-t">Most productive period</div><div class="ax-bar" role="img" aria-label="Most productive period: Afternoon 58%, Morning 24%, Evening 16%, Other 2%"><i class="s1" style="flex:58" title="Afternoon 58%"></i><i class="s2" style="flex:24" title="Morning 24%"></i><i class="s3" style="flex:16" title="Evening 16%"></i><i class="o" style="flex:2" title="Other 2%"></i></div><ul class="ax-lg"><li><i class="s1"></i>Afternoon<b>58%</b></li><li><i class="s2"></i>Morning<b>24%</b></li><li><i class="s3"></i>Evening<b>16%</b></li><li><i class="o"></i>Other<b>2%</b></li></ul></div>
+      <div class="ds-axis"><div class="ax-t">Work style</div><div class="ax-bar" role="img" aria-label="Work style: Hybrid 62%, Independent 38%"><i class="s1" style="flex:62" title="Hybrid 62%"></i><i class="s2" style="flex:38" title="Independent 38%"></i></div><ul class="ax-lg"><li><i class="s1"></i>Hybrid<b>62%</b></li><li><i class="s2"></i>Independent<b>38%</b></li></ul></div>
+      <div class="ds-axis"><div class="ax-t">Exercise goal</div><div class="ax-bar" role="img" aria-label="Exercise goal: Health 40%, Stress relief 33%, Fitness 19%, Muscle gain 7%, Other 2%"><i class="s1" style="flex:40" title="Health 40%"></i><i class="s2" style="flex:33" title="Stress relief 33%"></i><i class="s3" style="flex:19" title="Fitness 19%"></i><i class="s4" style="flex:7" title="Muscle gain 7%"></i><i class="o" style="flex:2" title="Other 2%"></i></div><ul class="ax-lg"><li><i class="s1"></i>Health<b>40%</b></li><li><i class="s2"></i>Stress relief<b>33%</b></li><li><i class="s3"></i>Fitness<b>19%</b></li><li><i class="s4"></i>Muscle gain<b>7%</b></li><li><i class="o"></i>Other<b>2%</b></li></ul></div>
+      <!-- /gen:div_axes -->
+      </div>
+      <div class="ds-div-foot">Anchored in the United States, split almost evenly between English and Chinese primary speakers, and late-shifted in sleep: a broad slice of lifestyles rather than one demographic mode.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contributions">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Contributions</span>
+      <h2>Three things every participant&nbsp;gave</h2>
+      <p class="intro">Daily logs, a persona and a 100-question survey. Together they supply the evidence an agent reads and the labels it is scored against.</p>
+    </div>
+    <div class="ds-give">
+
+      <div class="ds-card ds-give-card">
+        <div class="hd"><span class="no">01</span><div><h3>Daily logs</h3><div class="sub">28 to 44 days · around the clock</div></div></div>
+        <div class="ds-mini">
+          <div class="lab">Example entry</div>
+          <div class="ds-entry">
+            <div class="row"><i class="mk"></i><b>Wake</b><span class="mono">Day N</span></div>
+            <div class="q">“Woke up at 7:15, still a bit groggy”</div>
+            <div class="fields">
+              <span>wakeBucket <b>morning</b></span>
+              <span>mood <b class="pos">Relaxed · positive</b></span>
+              <span>agentHelp <b>—</b></span>
+            </div>
+          </div>
+        </div>
+        <!-- Appendix B sec:app-source and tab:domain-mapping: the app prompted the 12 event subdomains -->
+        <div class="lab2">The app prompted 12 event subdomains</div>
+        <div class="ds-subs">
+          <span class="ds-sub dot d1">wake</span><span class="ds-sub dot d1">bedtime</span><span class="ds-sub dot d1">nap</span><span class="ds-sub dot d2">food</span><span class="ds-sub dot d3">work</span><span class="ds-sub dot d4">entertainment</span><span class="ds-sub dot d5">weather</span><span class="ds-sub dot d5">travel</span><span class="ds-sub dot d6">shopping</span><span class="ds-sub dot d7">physical</span><span class="ds-sub dot d7">exercise</span><span class="ds-sub dot d7">event</span>
+        </div>
+        <!-- anchor coverage: Appendix B (B_Synthesis_Pipeline.tex), tab:dataset-summary: anchors with photograph ~40%, with mood annotation ~38%, flagged agentHelp ~5% -->
+        <div class="ds-meters" role="img" aria-label="Share of anchor events: about 40% carry a photo, about 38% a mood annotation, about 5% an agentHelp flag with a reason">
+          <div class="lab">Share of anchor events that…</div>
+          <div class="mt"><span>carry a photo</span><em>~40%</em><i><b style="width:40%"></b></i></div>
+          <div class="mt"><span>carry a mood annotation</span><em>~38%</em><i><b style="width:38%"></b></i></div>
+          <div class="mt"><span>raise an <code>agentHelp</code> flag, with a reason</span><em>~5%</em><i><b style="width:5%"></b></i></div>
+        </div>
+        <div class="ds-feeds"><span class="fk">→</span><div>Released verbatim as <b>anchor events</b>. Ground truth for Proactive Help and Emotion-Aware Modeling.</div></div>
+      </div>
+
+      <div class="ds-card ds-give-card">
+        <div class="hd"><span class="no">02</span><div><h3>Persona</h3><div class="sub">structured fields + self-description</div></div></div>
+        <div class="ds-mini">
+          <div class="lab">Schematic</div>
+          <div class="ds-id">
+            <div class="f"><span>age band</span><i style="width:46%"></i></div>
+            <div class="f"><span>gender</span><i style="width:38%"></i></div>
+            <div class="f"><span>region</span><i style="width:58%"></i></div>
+            <div class="f"><span>role</span><i style="width:50%"></i></div>
+            <div class="free"><div class="t">self-description, free text</div><i style="width:92%"></i><i style="width:84%"></i><i style="width:60%"></i></div>
+          </div>
+        </div>
+        <p class="ds-note">Written by the participant. Stage 1 of the synthesis distils it, together with the survey, into a profile and a deliberately vague survey insight, released as <code>profile_persona.json</code>.</p>
+        <div class="ds-feeds"><span class="fk">→</span><div>Forms the <b>C3 Persona Memory</b> level of the user-memory ladder and conditions the synthesis.</div></div>
+      </div>
+
+      <div class="ds-card ds-give-card">
+        <div class="hd"><span class="no">03</span><div><h3>Implicit-preference survey</h3><div class="sub">100 questions · 4 options · 8 lifestyle domains</div></div></div>
+        <div class="ds-mini">
+          <div class="lab">Schematic</div>
+          <div class="ds-survey">
+            <div class="qh"><span class="mono">Q 1 / 100</span><span class="mono dom">daily_routine</span></div>
+            <i class="sk" style="width:88%"></i><i class="sk" style="width:64%"></i>
+            <div class="opts"><span>A</span><span>B</span><span class="on">C</span><span>D</span></div>
+          </div>
+          <div class="ds-domains8">
+            <span>daily_routine</span><span>food_dining</span><span>work_study</span><span>leisure</span><span>commuting_travel</span><span>shopping</span><span>social_wellbeing</span><span class="x">cross_domain</span>
+          </div>
+          <div class="ds-domains8-cap"><span>7 lifestyle domains</span><span>+ 1 cross-domain</span></div>
+        </div>
+        <p class="ds-note">Seven lifestyle domains plus one cross-domain bucket whose questions span several of them. Four options per question, so random guessing scores 25%. The answers are never shown to the synthesizer as text.</p>
+        <div class="ds-feeds"><span class="fk">→</span><div>The <b>answer key</b> for Implicit Preference Reasoning and Cross-Domain Transfer.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="synthesis">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Synthesis</span>
+      <h2>Real anchors, clue-planted&nbsp;context</h2>
+      <p class="intro">Self-tracking is sparse, so a four-stage pipeline fills each day around the participant's own entries. Two contracts hold throughout: anchors stay verbatim, and survey answers enter only as a distilled insight, so preferences show up as behaviour, never as restated answers.</p>
+    </div>
+
+    <div class="ds-two wide">
+      <div class="ds-card ds-day">
+        <div class="ds-day-head">
+          <div class="ds-card-title">One day, as released<span>anchor entries from the paper's Figure 1</span></div>
+          <div class="who">Day N <span class="ds-tag">Example</span></div>
+        </div>
+        <div class="ds-ev anc"><i class="mk"></i><div><div class="top"><span class="dom">Wake</span><span class="ds-mood pos">Relaxed · positive</span></div><div class="txt">Woke up at 7:15, still a bit groggy</div></div><span class="tag">anchor</span></div>
+        <div class="ds-ev syn"><i class="mk"></i><div><i class="sk" style="width:46%"></i><i class="sk" style="width:78%"></i></div><span class="tag">synthetic</span></div>
+        <div class="ds-ev syn"><i class="mk"></i><div><i class="sk" style="width:34%"></i><i class="sk" style="width:62%"></i></div><span class="tag">synthetic · planted clue</span></div>
+        <div class="ds-ev anc"><i class="mk"></i><div><div class="top"><span class="dom">Work</span><span class="ds-mood neg">Stressed · negative</span></div><div class="txt">Run the experiment with a local model…</div></div><span class="tag">anchor</span></div>
+        <div class="ds-ev anc"><i class="mk"></i><div><div class="top"><span class="dom">Food</span></div><div class="txt">Had ramen for lunch…</div></div><span class="tag">anchor</span></div>
+        <div class="ds-ev syn"><i class="mk"></i><div><i class="sk" style="width:52%"></i><i class="sk" style="width:70%"></i></div><span class="tag">synthetic</span></div>
+        <div class="ds-ev anc"><i class="mk"></i><div><div class="top"><span class="dom">Exercise</span><span class="ds-mood pos">Confident · positive</span></div><div class="txt">Played pickleball for an hour…</div></div><span class="tag">anchor</span></div>
+        <div class="ds-ev syn"><i class="mk"></i><div><i class="sk" style="width:40%"></i><i class="sk" style="width:82%"></i></div><span class="tag">synthetic · planted clue</span></div>
+        <div class="ds-ev anc"><i class="mk"></i><div><div class="top"><span class="dom">Shopping</span></div><div class="txt">Ordered a T-shirt on Amazon…</div></div><span class="tag">anchor</span></div>
+        <div class="ds-ev syn"><i class="mk"></i><div><i class="sk" style="width:58%"></i><i class="sk" style="width:44%"></i></div><span class="tag">synthetic</span></div>
+        <div class="ds-ev anc"><i class="mk"></i><div><div class="top"><span class="dom">Bedtime</span><span class="ds-mood help">agentHelp</span></div><div class="txt">Lights off at 11:40, read…</div></div><span class="tag">anchor</span></div>
+        <div class="ds-day-foot">Synthetic rows are shown as placeholders. In the release they are full events with a subdomain, a time bucket and a long description.</div>
+      </div>
+
+      <div class="ds-stack">
+        <div class="ds-card ds-contract">
+          <span class="no">01</span>
+          <div><h3>Anchors stay verbatim</h3><p>Every original entry is reproduced exactly: text, timing fields, photo, mood note and <code>agentHelp</code> flag. The model may only add a third-person paraphrase of what the participant did.</p></div>
+        </div>
+        <div class="ds-card ds-contract">
+          <span class="no">02</span>
+          <div><h3>Survey answers never appear as text</h3><p>The 100 answers reach the synthesizer only as a distilled, deliberately vague <code>survey_insight</code>. Preferences surface as behaviour: a late dinner, a re-ordered errand, a sigh after a meeting.</p></div>
+        </div>
+        <div class="ds-card ds-ratio">
+          <div class="ds-card-title">About 440 events per participant<span>over 28 to 44 days</span></div>
+          <div class="ds-bar"><span class="a">anchor · about half</span><span class="s">synthetic · about half</span></div>
+          <div class="ds-ratio-foot">Anchor-completion, not anchor-replacement: every real event stays, synthetic events surround it.</div>
+        </div>
+        <div class="ds-card ds-kinds">
+          <div class="ds-card-title">What a synthetic event carries<span>a subdomain, a time bucket, a long description, sometimes a planted clue</span></div>
+          <div class="ds-field"><div class="fl">time bucket, never a clock time</div><div class="ds-subs">
+            <span class="ds-sub">deep night</span><span class="ds-sub">early morning</span><span class="ds-sub">morning</span><span class="ds-sub">noon</span><span class="ds-sub">afternoon</span><span class="ds-sub">dusk</span><span class="ds-sub">evening</span><span class="ds-sub">night</span><span class="ds-sub">late night</span>
+          </div></div>
+          <div class="ds-field"><div class="fl">planted clue, one of seven kinds (only for hard and very-hard questions)</div><div class="ds-subs">
+            <span class="ds-sub">timing detail</span><span class="ds-sub">consequence</span><span class="ds-sub">decision frame</span><span class="ds-sub">post-event mood</span><span class="ds-sub">social context</span><span class="ds-sub">app choice</span><span class="ds-sub">tiny detail</span>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-kicker">Four stages, then a validator</div>
+    <div class="ds-pipe">
+      <div class="ds-card ds-stage">
+        <div class="k">Stage 0</div>
+        <h4>Image grounding</h4>
+        <p>Photographs become action-focused captions written by a vision LLM.</p>
+        <div class="inv">What the user is doing, not what is in the frame.</div>
+      </div>
+      <div class="ds-card ds-stage">
+        <div class="k">Stage 1</div>
+        <h4>Persona and survey insight</h4>
+        <p>Persona and the 100 answers become a profile and one distilled survey insight.</p>
+        <div class="inv"><code>survey_insight</code> is the only conduit for survey content.</div>
+      </div>
+      <div class="ds-card ds-stage">
+        <div class="k">Stage 2</div>
+        <h4>Day skeleton and clue plan</h4>
+        <p>Per-day theme, narrative arc, dominant mood, planned events and a clue plan.</p>
+        <div class="inv">10 to 18 events a day; every anchor must appear.</div>
+      </div>
+      <div class="ds-card ds-stage">
+        <div class="k">Stage 3</div>
+        <h4>Trajectory expansion</h4>
+        <p>Five-day chunks become full anchor and synthetic events with long descriptions.</p>
+        <div class="inv">Anchors verbatim; clue kinds enforced.</div>
+      </div>
+      <div class="ds-card ds-stage check">
+        <div class="k">Validator</div>
+        <h4>Rule-based check</h4>
+        <p>Exact anchor equality, time-bucket consistency, event counts, privacy denylist.</p>
+        <div class="inv">Nine time buckets, no clock times, <code>Day N</code> only.</div>
+      </div>
+    </div>
+
+    <div class="ds-kicker">Does the synthetic layer invent the signal? Two checks from the paper</div>
+    <div class="ds-checks">
+      <!-- anchor-only vs full trajectory: Appendix N (N_Validation_Analyses.tex), tab:anchor-only. Implicit Preference accuracy, C2 and C4:
+           Gemini-3-Pro .381/.491 and .617/.675; Qwen3.6-27B .386/.491 and .601/.655; Gemini-2.5-Flash .387/.447 and .539/.580; Qwen3.5-9B .308/.328 and .469/.500 -->
+      <div class="ds-card ds-check">
+        <div class="ck-head"><span class="no">01</span><div><h3>Synthetic clues carry signal</h3><p>Keep every real anchor and remove every synthetic event: Implicit Preference accuracy falls by 2 to 11 points at Long Trajectory (C2) and by 3 to 6 points at Lifelong Memory (C4), and the stronger models lose the most.</p></div></div>
+        <div class="ds-dumb">
+          <div class="dr hd"><div class="dm"></div><div class="dh">Long Trajectory · C2</div><b class="dv">Δ pts</b><div class="dh">Lifelong Memory · C4</div><b class="dv">Δ pts</b></div>
+      <!-- gen:anchor_rows -->
+      <div class="dr"><div class="dm">Gemini-3-Pro</div><div class="db" data-m="Gemini-3-Pro" data-c="C2" data-a="38.1" data-f="49.1"><i class="ln" style="left:20.3%;width:27.5%"></i><i class="pt a" style="left:20.3%"></i><i class="pt f" style="left:47.8%"></i></div><b class="dv">&minus;11.0</b><div class="db" data-m="Gemini-3-Pro" data-c="C4" data-a="61.7" data-f="67.5"><i class="ln" style="left:79.3%;width:14.5%"></i><i class="pt a" style="left:79.3%"></i><i class="pt f" style="left:93.8%"></i></div><b class="dv">&minus;5.8</b></div>
+      <div class="dr"><div class="dm">Qwen3.6-27B</div><div class="db" data-m="Qwen3.6-27B" data-c="C2" data-a="38.6" data-f="49.1"><i class="ln" style="left:21.5%;width:26.2%"></i><i class="pt a" style="left:21.5%"></i><i class="pt f" style="left:47.8%"></i></div><b class="dv">&minus;10.5</b><div class="db" data-m="Qwen3.6-27B" data-c="C4" data-a="60.1" data-f="65.5"><i class="ln" style="left:75.2%;width:13.5%"></i><i class="pt a" style="left:75.2%"></i><i class="pt f" style="left:88.8%"></i></div><b class="dv">&minus;5.4</b></div>
+      <div class="dr"><div class="dm">Gemini-2.5-Flash</div><div class="db" data-m="Gemini-2.5-Flash" data-c="C2" data-a="38.7" data-f="44.7"><i class="ln" style="left:21.8%;width:15.0%"></i><i class="pt a" style="left:21.8%"></i><i class="pt f" style="left:36.8%"></i></div><b class="dv">&minus;6.0</b><div class="db" data-m="Gemini-2.5-Flash" data-c="C4" data-a="53.9" data-f="58.0"><i class="ln" style="left:59.8%;width:10.2%"></i><i class="pt a" style="left:59.8%"></i><i class="pt f" style="left:70.0%"></i></div><b class="dv">&minus;4.1</b></div>
+      <div class="dr"><div class="dm">Qwen3.5-9B</div><div class="db" data-m="Qwen3.5-9B" data-c="C2" data-a="30.8" data-f="32.8"><i class="ln" style="left:2.0%;width:5.0%"></i><i class="pt a" style="left:2.0%"></i><i class="pt f" style="left:7.0%"></i></div><b class="dv">&minus;2.0</b><div class="db" data-m="Qwen3.5-9B" data-c="C4" data-a="46.9" data-f="50.0"><i class="ln" style="left:42.2%;width:7.8%"></i><i class="pt a" style="left:42.2%"></i><i class="pt f" style="left:50.0%"></i></div><b class="dv">&minus;3.1</b></div>
+      <div class="dr ax"><div class="dm"></div><div class="dt"><span style="left:0.0%">30</span><span style="left:50.0%">50</span><span style="left:100.0%">70</span></div><b class="dv"></b><div class="dt"><span style="left:0.0%">30</span><span style="left:50.0%">50</span><span style="left:100.0%">70</span></div><b class="dv"></b></div>
+      <!-- /gen:anchor_rows -->
+        </div>
+        <div class="ds-legend small"><span><i class="pa"></i>anchor-only trajectory</span><span><i class="pf"></i>full trajectory, as released</span><span class="ax">accuracy (%) · chance is 25%</span></div>
+        <details class="ds-tbl"><summary>Table</summary><table><thead><tr><th>Model</th><th>C2 anchor-only (%)</th><th>C2 full (%)</th><th>Δ (points)</th><th>C4 anchor-only (%)</th><th>C4 full (%)</th><th>Δ (points)</th></tr></thead><tbody>
+      <!-- gen:anchor_table -->
+<tr><td>Gemini-3-Pro</td><td>38.1</td><td>49.1</td><td>&minus;11.0</td><td>61.7</td><td>67.5</td><td>&minus;5.8</td></tr>
+<tr><td>Qwen3.6-27B</td><td>38.6</td><td>49.1</td><td>&minus;10.5</td><td>60.1</td><td>65.5</td><td>&minus;5.4</td></tr>
+<tr><td>Gemini-2.5-Flash</td><td>38.7</td><td>44.7</td><td>&minus;6.0</td><td>53.9</td><td>58.0</td><td>&minus;4.1</td></tr>
+<tr><td>Qwen3.5-9B</td><td>30.8</td><td>32.8</td><td>&minus;2.0</td><td>46.9</td><td>50.0</td><td>&minus;3.1</td></tr>
+      <!-- /gen:anchor_table -->
+        </tbody></table></details>
+      </div>
+      <!-- synthesizer swap: Appendix N (N_Validation_Analyses.tex), tab:resynth. Lifelong Memory (C4) accuracy under (a) 42 users GPT synthesis, (b) random 15 users GPT synthesis,
+           (c) the same 15 users re-synthesised with Qwen3.6-Plus: Gemini-3-Pro .675/.688/.641; Qwen3.6-27B .655/.640/.622; Gemma-4-31B .652/.636/.618; Claude-Sonnet-4.6 .631/.630/.598; GPT-5 .585/.595/.551 -->
+      <div class="ds-card ds-check">
+        <div class="ck-head"><span class="no">02</span><div><h3>Not tied to one generator</h3><p>Re-synthesising 15 users with Qwen3.6-Plus instead of gpt-5-mini moves Lifelong Memory accuracy by at most 4.7 points, and the lines never cross: the five models rank the same in all three settings.</p></div></div>
+      <!-- gen:slope -->
+<svg class="ds-slope" viewBox="0 0 520 196" role="img" aria-label="Lifelong Memory accuracy of five models under three synthesis settings; the ranking is identical in all three">
+        <line class="g" x1="36" y1="156.5" x2="324" y2="156.5"/><text class="t" x="28" y="160.0" text-anchor="end">55</text>
+        <line class="g" x1="36" y1="109.0" x2="324" y2="109.0"/><text class="t" x="28" y="112.5" text-anchor="end">60</text>
+        <line class="g" x1="36" y1="61.5" x2="324" y2="61.5"/><text class="t" x="28" y="65.0" text-anchor="end">65</text>
+        <line class="g" x1="36" y1="14.0" x2="324" y2="14.0"/><text class="t" x="28" y="17.5" text-anchor="end">70</text>
+        <text class="t" x="36" y="184" text-anchor="middle">(a) 42 users</text>
+        <text class="t" x="180.0" y="184" text-anchor="middle">(b) 15 users</text>
+        <text class="t" x="324" y="184" text-anchor="middle">(c) 15 users</text>
+        <text class="t2" x="36" y="194" text-anchor="middle">GPT synthesis</text>
+        <text class="t2" x="180.0" y="194" text-anchor="middle">GPT synthesis</text>
+        <text class="t2" x="324" y="194" text-anchor="middle">Qwen3.6-Plus synthesis</text>
+        <polyline class="s" points="36.0,37.7 180.0,25.4 324.0,70.0" data-m="Gemini-3-Pro"/>
+        <polyline class="s" points="36.0,56.7 180.0,71.0 324.0,88.1" data-m="Qwen3.6-27B"/>
+        <polyline class="s" points="36.0,59.6 180.0,74.8 324.0,91.9" data-m="Gemma-4-31B"/>
+        <polyline class="s" points="36.0,79.5 180.0,80.5 324.0,110.9" data-m="Claude-Sonnet-4.6"/>
+        <polyline class="s" points="36.0,123.3 180.0,113.8 324.0,155.5" data-m="GPT-5"/>
+        <circle class="p" cx="36.0" cy="37.7" r="4.5" data-m="Gemini-3-Pro"/>
+        <circle class="p" cx="180.0" cy="25.4" r="4.5" data-m="Gemini-3-Pro"/>
+        <circle class="p" cx="324.0" cy="70.0" r="4.5" data-m="Gemini-3-Pro"/>
+        <path class="ld" d="M331.0,70.0 L346.0,70.0 L354.0,70.0"/>
+        <text class="lb" x="360.0" y="73.8">Gemini-3-Pro<tspan class="d"> −4.7</tspan></text>
+        <circle class="p" cx="36.0" cy="56.7" r="4.5" data-m="Qwen3.6-27B"/>
+        <circle class="p" cx="180.0" cy="71.0" r="4.5" data-m="Qwen3.6-27B"/>
+        <circle class="p" cx="324.0" cy="88.1" r="4.5" data-m="Qwen3.6-27B"/>
+        <path class="ld" d="M331.0,88.1 L346.0,94.0 L354.0,94.0"/>
+        <text class="lb" x="360.0" y="97.8">Qwen3.6-27B<tspan class="d"> −1.8</tspan></text>
+        <circle class="p" cx="36.0" cy="59.6" r="4.5" data-m="Gemma-4-31B"/>
+        <circle class="p" cx="180.0" cy="74.8" r="4.5" data-m="Gemma-4-31B"/>
+        <circle class="p" cx="324.0" cy="91.9" r="4.5" data-m="Gemma-4-31B"/>
+        <path class="ld" d="M331.0,91.9 L346.0,118.0 L354.0,118.0"/>
+        <text class="lb" x="360.0" y="121.8">Gemma-4-31B<tspan class="d"> −1.8</tspan></text>
+        <circle class="p" cx="36.0" cy="79.5" r="4.5" data-m="Claude-Sonnet-4.6"/>
+        <circle class="p" cx="180.0" cy="80.5" r="4.5" data-m="Claude-Sonnet-4.6"/>
+        <circle class="p" cx="324.0" cy="110.9" r="4.5" data-m="Claude-Sonnet-4.6"/>
+        <path class="ld" d="M331.0,110.9 L346.0,142.0 L354.0,142.0"/>
+        <text class="lb" x="360.0" y="145.8">Claude-Sonnet-4.6<tspan class="d"> −3.2</tspan></text>
+        <circle class="p" cx="36.0" cy="123.3" r="4.5" data-m="GPT-5"/>
+        <circle class="p" cx="180.0" cy="113.8" r="4.5" data-m="GPT-5"/>
+        <circle class="p" cx="324.0" cy="155.5" r="4.5" data-m="GPT-5"/>
+        <path class="ld" d="M331.0,155.5 L346.0,166.0 L354.0,166.0"/>
+        <text class="lb" x="360.0" y="169.8">GPT-5<tspan class="d"> −4.4</tspan></text>
+        <circle class="hit" cx="36.0" cy="37.7" r="13" data-m="Gemini-3-Pro" data-k="a" data-v="67.5"/>
+        <circle class="hit" cx="180.0" cy="25.4" r="13" data-m="Gemini-3-Pro" data-k="b" data-v="68.8"/>
+        <circle class="hit" cx="324.0" cy="70.0" r="13" data-m="Gemini-3-Pro" data-k="c" data-v="64.1"/>
+        <circle class="hit" cx="36.0" cy="56.7" r="13" data-m="Qwen3.6-27B" data-k="a" data-v="65.5"/>
+        <circle class="hit" cx="180.0" cy="71.0" r="13" data-m="Qwen3.6-27B" data-k="b" data-v="64.0"/>
+        <circle class="hit" cx="324.0" cy="88.1" r="13" data-m="Qwen3.6-27B" data-k="c" data-v="62.2"/>
+        <circle class="hit" cx="36.0" cy="59.6" r="13" data-m="Gemma-4-31B" data-k="a" data-v="65.2"/>
+        <circle class="hit" cx="180.0" cy="74.8" r="13" data-m="Gemma-4-31B" data-k="b" data-v="63.6"/>
+        <circle class="hit" cx="324.0" cy="91.9" r="13" data-m="Gemma-4-31B" data-k="c" data-v="61.8"/>
+        <circle class="hit" cx="36.0" cy="79.5" r="13" data-m="Claude-Sonnet-4.6" data-k="a" data-v="63.1"/>
+        <circle class="hit" cx="180.0" cy="80.5" r="13" data-m="Claude-Sonnet-4.6" data-k="b" data-v="63.0"/>
+        <circle class="hit" cx="324.0" cy="110.9" r="13" data-m="Claude-Sonnet-4.6" data-k="c" data-v="59.8"/>
+        <circle class="hit" cx="36.0" cy="123.3" r="13" data-m="GPT-5" data-k="a" data-v="58.5"/>
+        <circle class="hit" cx="180.0" cy="113.8" r="13" data-m="GPT-5" data-k="b" data-v="59.5"/>
+        <circle class="hit" cx="324.0" cy="155.5" r="13" data-m="GPT-5" data-k="c" data-v="55.1"/>
+      </svg>
+      <!-- /gen:slope -->
+        <div class="ds-legend small"><span><i class="pf"></i>Lifelong Memory (C4) accuracy, one line per model</span><span class="ax">labels: (c) − (b), in points</span></div>
+        <details class="ds-tbl"><summary>Table</summary><table><thead><tr><th>Model</th><th>(a) 42 users, GPT (%)</th><th>(b) 15 users, GPT (%)</th><th>(c) 15 users, Qwen3.6-Plus (%)</th><th>(c) − (b), points</th></tr></thead><tbody>
+      <!-- gen:slope_table -->
+<tr><td>Gemini-3-Pro</td><td>67.5</td><td>68.8</td><td>64.1</td><td>-4.7</td></tr>
+<tr><td>Qwen3.6-27B</td><td>65.5</td><td>64.0</td><td>62.2</td><td>-1.8</td></tr>
+<tr><td>Gemma-4-31B</td><td>65.2</td><td>63.6</td><td>61.8</td><td>-1.8</td></tr>
+<tr><td>Claude-Sonnet-4.6</td><td>63.1</td><td>63.0</td><td>59.8</td><td>-3.2</td></tr>
+<tr><td>GPT-5</td><td>58.5</td><td>59.5</td><td>55.1</td><td>-4.4</td></tr>
+      <!-- /gen:slope_table -->
+        </tbody></table></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="taxonomy">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Taxonomy</span>
+      <h2>12 event subdomains, 8&nbsp;lifestyle&nbsp;domains</h2>
+      <p class="intro">Every event carries a fine-grained subdomain; every survey question carries a lifestyle domain. This many-to-one map is the only bridge between the two, and the seven lifestyle domains are the ablation targets of Cross-Domain Transfer.</p>
+    </div>
+    <!-- photographs: assets/photos/ds-<domain>.webp (Wikimedia Commons, credits in assets/photos/CREDITS.md), shown as duotones in the domain colour; the band is removed if a file is missing -->
+    <div class="ds-tax">
+      <div class="ds-dom d1"><span class="ph"><img src="assets/photos/ds-routine.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">daily_routine</div><h3>Daily routine</h3><div class="subs"><span class="ds-sub dot">wake</span><span class="ds-sub dot">bedtime</span><span class="ds-sub dot">nap</span></div></div>
+      <div class="ds-dom d2"><span class="ph"><img src="assets/photos/ds-food.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">food_dining</div><h3>Food &amp; dining</h3><div class="subs"><span class="ds-sub dot">food</span></div></div>
+      <div class="ds-dom d3"><span class="ph"><img src="assets/photos/ds-work.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">work_study</div><h3>Work &amp; study</h3><div class="subs"><span class="ds-sub dot">work</span></div></div>
+      <div class="ds-dom d4"><span class="ph"><img src="assets/photos/ds-leisure.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">leisure</div><h3>Leisure</h3><div class="subs"><span class="ds-sub dot">entertainment</span></div></div>
+      <div class="ds-dom d5"><span class="ph"><img src="assets/photos/ds-transit.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">commuting_travel</div><h3>Commuting &amp; travel</h3><div class="subs"><span class="ds-sub dot">weather</span><span class="ds-sub dot">travel</span></div><div class="fn">weather also carries the leave-home and return-home times</div></div>
+      <div class="ds-dom d6"><span class="ph"><img src="assets/photos/ds-shopping.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">shopping</div><h3>Shopping</h3><div class="subs"><span class="ds-sub dot">shopping</span></div></div>
+      <div class="ds-dom d7"><span class="ph"><img src="assets/photos/ds-social.webp" alt="" onerror="this.parentNode.remove()"></span><div class="code">social_wellbeing</div><h3>Social &amp; wellbeing</h3><div class="subs"><span class="ds-sub dot">physical</span><span class="ds-sub dot">exercise</span><span class="ds-sub dot">event</span></div></div>
+      <div class="ds-dom cross"><div class="code">cross_domain</div><h3>Cross-domain</h3><p>Questions that span several lifestyle domains. No subdomain of its own and not an ablation target.</p></div>
+    </div>
+    <div class="ds-tax-foot"><span class="ds-sub dot">other</span> any self-reported subdomain outside the twelve. It maps to no lifestyle domain and is kept in every ablation.</div>
+
+    <div class="ds-kicker">Where the 18,471 events fall</div>
+    <!-- composition of the release: Appendix B (B_Synthesis_Pipeline.tex), sec:app-composition and the captions of fig:composition-events (shares of the 18,471 events:
+         Daily Routine 23.9, Entertainment & Leisure 15.7, Food & Dining 15.0, Work & Study 14.5, Social & Wellbeing 12.9, Transit & Travel 9.2, Shopping 8.8) and
+         fig:composition-tokens (token-weighted shares of ~3.17M tokens: 22.8, 16.4, 15.9, 15.1, 12.4, 9.2, 8.2). Bars are scaled so that 25% fills the track. -->
+    <div class="ds-card ds-comp">
+      <div class="ds-comp-head">
+        <div class="ds-card-title">Share of the release by lifestyle domain<span>18,471 events and about 3.17M tokens across the 42 participants</span></div>
+        <span class="ds-tag">Appendix B</span>
+      </div>
+      <div class="ds-comp-rows">
+        <div class="cr hd"><div class="cn"></div><div class="cb"></div><b class="v">events</b><b class="v tk">tokens</b></div>
+      <!-- gen:comp_rows -->
+      <div class="cr d1" data-ev="23.9" data-tk="22.8"><div class="cn"><i class="dot"></i><span>Daily routine<small>daily_routine</small></span></div><div class="cb"><i class="ev" style="width:95.6%"></i><i class="tk" style="width:91.2%"></i></div><b class="v">23.9%</b><b class="v tk">22.8%</b></div>
+      <div class="cr d4" data-ev="15.7" data-tk="16.4"><div class="cn"><i class="dot"></i><span>Leisure<small>leisure</small></span></div><div class="cb"><i class="ev" style="width:62.8%"></i><i class="tk" style="width:65.6%"></i></div><b class="v">15.7%</b><b class="v tk">16.4%</b></div>
+      <div class="cr d2" data-ev="15.0" data-tk="15.9"><div class="cn"><i class="dot"></i><span>Food &amp; dining<small>food_dining</small></span></div><div class="cb"><i class="ev" style="width:60.0%"></i><i class="tk" style="width:63.6%"></i></div><b class="v">15.0%</b><b class="v tk">15.9%</b></div>
+      <div class="cr d3" data-ev="14.5" data-tk="15.1"><div class="cn"><i class="dot"></i><span>Work &amp; study<small>work_study</small></span></div><div class="cb"><i class="ev" style="width:58.0%"></i><i class="tk" style="width:60.4%"></i></div><b class="v">14.5%</b><b class="v tk">15.1%</b></div>
+      <div class="cr d7" data-ev="12.9" data-tk="12.4"><div class="cn"><i class="dot"></i><span>Social &amp; wellbeing<small>social_wellbeing</small></span></div><div class="cb"><i class="ev" style="width:51.6%"></i><i class="tk" style="width:49.6%"></i></div><b class="v">12.9%</b><b class="v tk">12.4%</b></div>
+      <div class="cr d5" data-ev="9.2" data-tk="9.2"><div class="cn"><i class="dot"></i><span>Commuting &amp; travel<small>commuting_travel</small></span></div><div class="cb"><i class="ev" style="width:36.8%"></i><i class="tk" style="width:36.8%"></i></div><b class="v">9.2%</b><b class="v tk">9.2%</b></div>
+      <div class="cr d6" data-ev="8.8" data-tk="8.2"><div class="cn"><i class="dot"></i><span>Shopping<small>shopping</small></span></div><div class="cb"><i class="ev" style="width:35.2%"></i><i class="tk" style="width:32.8%"></i></div><b class="v">8.8%</b><b class="v tk">8.2%</b></div>
+      <!-- /gen:comp_rows -->
+      </div>
+      <div class="ds-comp-foot">
+        <div class="ds-legend small"><span><i class="ev"></i>share of events</span><span><i class="tk"></i>share of tokens</span></div>
+        <p>The two views never differ by more than 1.1 points, so no domain is over- or under-described relative to how often it occurs, and all nine time buckets are populated within every domain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="release">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Release</span>
+      <h2>Get the data and the&nbsp;code</h2>
+      <p class="intro">One archive on Harvard Dataverse, one repository on GitHub, one command to lay the data out.</p>
+    </div>
+    <div class="ds-rel">
+      <div class="ds-card ds-tree">
+        <div class="ds-card-title">What is in the download<span>jarvis-bench_full.zip</span></div>
+        <ul class="root">
+          <li><div class="r"><span class="nm zip">jarvis-bench_full.zip</span><span class="d">one file</span></div>
+            <ul>
+              <li><div class="r"><span class="nm dir">jarvis-bench_full/</span></div>
+            <ul>
+              <li><div class="r"><span class="nm zip">User.zip</span></div>
+                <ul>
+                  <!-- listing of the released User.zip, 2026-11-05: 42 complete folders, 3 partial (persona and logs only) -->
+                  <li><div class="r"><span class="nm dir">User/&lt;user&gt;/</span><span class="d">42 participants, one folder each</span></div>
+                    <ul>
+                      <li><div class="r"><span class="nm">synthetic_trajectory.json</span><span class="d">the trajectory</span></div></li>
+                      <li><div class="r"><span class="nm">profile_persona.json</span><span class="d">profile + survey insight</span></div></li>
+                      <li><div class="r"><span class="nm">skeleton.json</span><span class="d">day skeleton + clue plan</span></div></li>
+                      <li><div class="r"><span class="nm">qa_report.json</span><span class="d">validator report</span></div></li>
+                      <li><div class="r wrap"><span class="nm dir">skeleton_windows/ · chunks/ · run_logs/</span><span class="d">intermediate files</span></div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><div class="r"><span class="nm zip">Image.zip</span></div>
+                <ul>
+                  <li><div class="r"><span class="nm dir">Image/&lt;user&gt;/Day&lt;N&gt;/&lt;photo&gt;</span><span class="d">photographs, by day</span></div></li>
+                </ul>
+              </li>
+            </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ds-stack">
+        <div class="ds-card ds-res">
+          <div class="hd"><h3>Dataset</h3><div class="meta">Harvard Dataverse · doi:10.7910/DVN/8UKMK1 · CC BY-NC 4.0</div></div>
+          <p>Trajectories, personas, skeletons and photographs for the 42 participants.</p>
+          <div class="row"><a class="btn btn-sm btn-primary" href="https://doi.org/10.7910/DVN/8UKMK1"><svg><use href="#i-db"/></svg>Harvard Dataverse</a></div>
+        </div>
+        <div class="ds-card ds-res">
+          <div class="hd"><h3>Code</h3><div class="meta">GitHub · AgentMemoryWorld/JARVIS-Bench · MIT</div></div>
+          <p>Evaluation code, prompts and the survey answer key, <code>ground_truth/survey_ground_truth.json</code>. One command lays the data out:</p>
+          <div class="ds-cmd"><code id="ds-cmd">python tools/prepare_data.py /path/to/jarvis-bench_full.zip</code><button class="btn btn-sm" id="ds-copy"><svg><use href="#i-copy"/></svg><span>Copy</span></button></div>
+          <div class="row"><a class="btn btn-sm" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Open on GitHub</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-priv">
+      <div class="ph">
+        <h3>Consent and privacy</h3>
+      </div>
+      <div>
+        <ul>
+          <li>Collected under a protocol approved by the IRB of the University of Illinois Chicago; every participant consented.</li>
+          <li>Fully anonymous: no surnames, precise locations or calendar dates. Days are relative, <code>Day N</code>, and synthetic events carry time buckets instead of clock times.</li>
+          <li>Photographs enter the trajectory text only as action-focused captions; the photographs themselves ship for the image variants of Proactive Help and Emotion-Aware Modeling.</li>
+          <li>Every released trajectory was confirmed by its participant as a plausible stretch of their own life.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resources moved into src/data.html (Release section of the Dataset page). Intentionally empty. -->
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <div><b style="color:var(--ink)">JARVIS-Bench</b> · NeurIPS 2026 Evaluations &amp; Datasets Track</div>
+    <div>Data CC BY-NC 4.0 · Code MIT · <a href="https://github.com/AgentMemoryWorld/JARVIS-Bench">GitHub</a> · <a href="https://openreview.net/forum?id=yGQt9wAGkS">OpenReview</a></div>
+  </div>
+  <div class="container credits"><details><summary>Image credits</summary><p>Illustrations: Open Peeps by Pablo Stanley (CC0). Photographs from Wikimedia Commons, cropped, resized and colour-toned for this site; adaptations of CC BY-SA photographs are shared under the same licence. Institution and model logos are trademarks of their owners.</p><ul><li><a href="https://commons.wikimedia.org/wiki/File:Chinese_Beef_Noodle_Soup_-_%E4%B8%AD%E5%BC%8F%E7%89%9B%E8%82%89%E6%B9%AF%E9%BA%B5.jpg">Chinese Beef Noodle Soup - 中式牛肉湯麵</a> by NeoBatfreak, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Das_Vinyl_dreht_sich.jpg">Das Vinyl dreht sich</a> by Sulamith Sallmann, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Bed_in_Seattle_hotel.jpg">Bed in Seattle hotel</a> by Liz Lawley, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Melbourne_(AU),_Queen_Victoria_Market_--_2019_--_1544.jpg">Melbourne (AU), Queen Victoria Market -- 2019 -- 1544</a> by Dietmar Rabich, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Tennis_court_(net).jpg">Tennis court (net)</a> by Jim, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Gare_de_Boitsfort_platforms_on_a_foggy_morning_in_December_(Belgium).jpg">Gare de Boitsfort platforms on a foggy morning in December (Belgium)</a> by Trougnouf, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Laptop_picture_with_notepad.jpg">Laptop picture with notepad</a> by Eric Bailey, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></li></ul></details></div>
+</footer>
+
+<div class="lightbox" id="lightbox"><div><img alt=""><div class="cap"></div></div></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/logos.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/page-dataset.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Photo credits (Wikimedia Commons)
+
+- assets/photos/wake.webp: "Bright turquoise mug sits on a wooden table by the window, reflecting morning light, inviting a quiet moment of reflection.jpg" by Shixart1985, CC BY 2.0, https://commons.wikimedia.org/wiki/File:Bright_turquoise_mug_sits_on_a_wooden_table_by_the_window,_reflecting_morning_light,_inviting_a_quiet_moment_of_reflection.jpg
+- assets/photos/transit.webp: "Vitoria - Tranvía - Interior 01.jpg" by Basotxerri, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Vitoria_-_Tranv%C3%ADa_-_Interior_01.jpg
+- assets/photos/work.webp: "Laptop and small plant on a desk in a modern workspace during daylight hours.jpg" by Shixart1985, CC BY 2.0, https://commons.wikimedia.org/wiki/File:Laptop_and_small_plant_on_a_desk_in_a_modern_workspace_during_daylight_hours.jpg
+- assets/photos/food.webp: "Tonkotsu Ramen - Goemon Ramen Bar 2023-06-06.jpg" by Andy Li, CC0, https://commons.wikimedia.org/wiki/File:Tonkotsu_Ramen_-_Goemon_Ramen_Bar_2023-06-06.jpg
+- assets/photos/exercise.webp: "All-weather running track.jpg" by Mk2010, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:All-weather_running_track.jpg
+- assets/photos/shopping.webp: "Kai Oberhäuser 2017-03-19 (Unsplash).jpg" by Kai Oberhäuser (Unsplash), CC0, https://commons.wikimedia.org/wiki/File:Kai_Oberh%C3%A4user_2017-03-19_(Unsplash).jpg
+- assets/photos/leisure.webp: "Empty Movie Theater Seats (54279616742).jpg" by Eden, Janine and Jim (Flickr), CC BY 2.0, https://commons.wikimedia.org/wiki/File:Empty_Movie_Theater_Seats_(54279616742).jpg
+- assets/photos/sleep.webp: "Bedroom @ night (3119861751).jpg" by Matt @ PEK (Flickr), CC BY-SA 2.0, https://commons.wikimedia.org/wiki/File:Bedroom_@_night_(3119861751).jpg
+- assets/photos/ds-routine.webp: "Bed in Seattle hotel.jpg" by Liz Lawley, CC BY-SA 2.0, https://commons.wikimedia.org/wiki/File:Bed_in_Seattle_hotel.jpg
+- assets/photos/ds-food.webp: "Chinese Beef Noodle Soup - 中式牛肉湯麵.jpg" by NeoBatfreak, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Chinese_Beef_Noodle_Soup_-_%E4%B8%AD%E5%BC%8F%E7%89%9B%E8%82%89%E6%B9%AF%E9%BA%B5.jpg
+- assets/photos/ds-work.webp: "Laptop picture with notepad.jpg" by Eric Bailey, CC0, https://commons.wikimedia.org/wiki/File:Laptop_picture_with_notepad.jpg
+- assets/photos/ds-leisure.webp: "Das Vinyl dreht sich.jpg" by Sulamith Sallmann, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Das_Vinyl_dreht_sich.jpg
+- assets/photos/ds-transit.webp: "Gare de Boitsfort platforms on a foggy morning in December (Belgium).jpg" by Trougnouf, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Gare_de_Boitsfort_platforms_on_a_foggy_morning_in_December_(Belgium).jpg
+- assets/photos/ds-shopping.webp: "Melbourne (AU), Queen Victoria Market -- 2019 -- 1544.jpg" by Dietmar Rabich, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Melbourne_(AU),_Queen_Victoria_Market_--_2019_--_1544.jpg
+- assets/photos/ds-social.webp: "Tennis court (net).jpg" by Jim, CC BY-SA 2.0, https://commons.wikimedia.org/wiki/File:Tennis_court_(net).jpg
+- assets/photos/tasks-walk.webp: "Park na Środuli, Sosnowiec, Jesień 2021.jpg" by Krzysztof Popławski, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Park_na_%C5%9Aroduli,_Sosnowiec,_Jesie%C5%84_2021.jpg (tasks page scene, resized, shown as a blue duotone)
+- assets/photos/tasks-rain.webp: "Late autumn rainy night in Moscow (54889230493).jpg" by kishjar?, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Late_autumn_rainy_night_in_Moscow_(54889230493).jpg (tasks page scene, cropped to street level and resized, shown as a peach duotone)
+- assets/photos/tasks-night.webp: "Reading mail at night (Unsplash).jpg" by Jay Wennington, CC0, https://commons.wikimedia.org/wiki/File:Reading_mail_at_night_(Unsplash).jpg (tasks page scene, resized, shown as a pink duotone)
+- assets/photos/tasks-gallery.webp: "Christchurch art gallery interior.jpg" by Sgerbic, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Christchurch_art_gallery_interior.jpg (tasks page scene, resized, shown as a green duotone)
