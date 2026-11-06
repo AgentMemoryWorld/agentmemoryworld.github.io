@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · JARVIS-Bench</title>
+<meta name="description" content="JARVIS-Bench evaluates personal intelligence agents on 28 to 44 days of real users' daily traces: implicit preferences, proactive help, emotion, and cross-domain transfer. NeurIPS 2026 Evaluations & Datasets Track.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/page-blog.css">
+</head>
+<body class="page-blog">
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-paper" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V5.5M4.5 12v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V12"/></g></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 5.5V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h.5"/></g></symbol>
+  <symbol id="i-img" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/></g></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html"><img src="assets/mark-sm.svg" alt=""><span>JARVIS<span class="b2">-Bench</span></span></a>
+    <nav class="nav-links">
+      <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="dataset.html">Dataset</a>
+      <a href="tasks.html">Tasks</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-sm" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Code</a>
+      <a class="btn btn-sm btn-primary" href="https://openreview.net/forum?id=yGQt9wAGkS"><svg><use href="#i-paper"/></svg>Paper</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- Blog: the paper's figures with short notes. Figures are rendered from the camera-ready Overleaf sources (img/persona_fig1.pdf,
+     img/persona_fig2.pdf with its centre count line removed, img/drafts/fig_main_2rows_muted_scaling.pdf, img/ablation_combined_set2_percent_gpt5.png)
+     into assets/blog/. Numbers: abstract; Fig 1 caption; Section 4 and Discussion (means 34.8 / 47.2 / 50.7, best 73.2, chance 25);
+     Discussion and Appendix N tab:cdt-families (leisure -12.8 over the three GPT-5 sizes), Section 4.3 (keep-only leisure +20.8). -->
+<section class="section first" id="blog">
+  <div class="container bl">
+    <header class="bl-head">
+      <span class="eyebrow">Blog</span>
+      <h2>What weeks of real life teach a personal agent</h2>
+      <p class="intro">A short tour of JARVIS-Bench through the figures of our NeurIPS 2026 paper: how the data was collected, what the tasks ask, and how far 54 LLMs get with a user's memory.</p>
+      <div class="bl-meta"><span>NeurIPS 2026 · Evaluations &amp; Datasets Track</span><a href="https://openreview.net/forum?id=yGQt9wAGkS">Read the paper</a></div>
+    </header>
+
+    <article class="bl-post">
+      <section class="bl-sec">
+        <span class="bl-n">01</span>
+        <div class="bl-txt">
+          <h3>Real days, kept as they were logged</h3>
+          <p>Personalization benchmarks rarely follow real people over long periods, and they often reduce personalization to recommendation or fact retrieval. JARVIS-Bench starts from participants who logged their own days through a mobile web app for 28 to 44 days: waking up, meals, work, exercise, entertainment, shopping and bedtime, often with a photo and a mood. Every real entry stays in the trajectory verbatim, and the same people supplied the answers: a 100-question preference survey, a flag whenever they wanted help, and their own mood keywords.</p>
+        </div>
+        <figure class="bl-fig">
+          <button type="button" data-lightbox="assets/blog/fig1.webp" data-cap="Real-user traces and ground-truth feedback (Figure 1 of the paper)."><img src="assets/blog/fig1.webp" width="2002" height="1033" alt="Figure 1 of the paper: daily logs of several users across days, the lifestyle domains and apps they cover, the mobile app, and example entries with moods, photos and a moment where the agent should help."></button>
+          <figcaption><b>Figure 1.</b> Real-user traces and ground-truth feedback. Daily logs organise multimodal life events across time, users and domains, and carry implicit-preference, emotion and proactive-help signals.</figcaption>
+        </figure>
+      </section>
+
+      <section class="bl-sec">
+        <span class="bl-n">02</span>
+        <div class="bl-txt">
+          <h3>Four questions about one person</h3>
+          <p>All tasks read the same trajectory through one event iterator. Implicit Preference Reasoning asks the agent to answer the person's own survey from behaviour alone. Proactive Help Prediction asks whether this is a moment to step in, and why. Emotion-Aware Modeling asks how the person feels. Cross-Domain Transfer asks whether evidence from one part of life carries over to another.</p>
+        </div>
+        <figure class="bl-fig">
+          <button type="button" data-lightbox="assets/blog/fig2.webp" data-cap="The four task surfaces of JARVIS-Bench (Figure 2 of the paper)."><img src="assets/blog/fig2.webp" width="2003" height="1546" loading="lazy" alt="Figure 2 of the paper: four panels, Implicit Preference, Cross-Domain Transfer, Proactive Help and Emotion-Aware, each with a scenario, past episodes and Jarvis's reply, around a lifelong personal intelligence agent."></button>
+          <figcaption><b>Figure 2.</b> The four task surfaces, each shown with a scenario, the past episodes Jarvis draws on, and its reply.</figcaption>
+        </figure>
+      </section>
+
+      <section class="bl-sec">
+        <span class="bl-n">03</span>
+        <div class="bl-txt">
+          <h3>Memory helps, but no model is close</h3>
+          <p>We evaluate 54 LLMs from 11 families on the 100-question survey under five memory levels, from No Memory (C0) to Lifelong Memory (C4). Averaged over the models, accuracy rises from 34.8% with no memory to 47.2% with the long trajectory, while the persona profile adds only 3.5 more points: the behavioural trace, not the profile, drives most of the gain. Even with lifelong memory, the best model, GPT-6-Astra, reaches 73.2%. Random guessing scores 25%.</p>
+        </div>
+        <figure class="bl-fig">
+          <button type="button" data-lightbox="assets/blog/main.webp" data-cap="Implicit Preference Reasoning accuracy across the memory ladder, all 54 models."><img src="assets/blog/main.webp" width="2195" height="2037" loading="lazy" alt="Stacked bars for 54 models grouped by family (Claude, GPT, Grok, Gemini, Qwen, Gemma, DeepSeek, GLM, Kimi, MiMo, MiniMax): accuracy at C0 to C4, with dashed lines at the C2 mean 47.2 and the C4 mean 61.7."></button>
+          <figcaption><b>Figure 3.</b> Implicit Preference Reasoning accuracy for all 54 models, grouped by family. Each bar stacks No Memory (C0) up to Lifelong Memory (C4); dashed lines mark the C2 and C4 means. The full table is on the <a href="index.html#leaderboard">leaderboard</a>.</figcaption>
+        </figure>
+      </section>
+
+      <section class="bl-sec">
+        <span class="bl-n">04</span>
+        <div class="bl-txt">
+          <h3>Where a preference lives</h3>
+          <p>Cross-Domain Transfer removes one lifestyle domain from the trajectory (drop-one) or keeps only that domain (keep-only), then asks that domain's questions again. Leisure is both the most necessary and the most self-sufficient domain: without it, same-domain accuracy falls by 12.8 points on average over the three GPT-5 sizes, and kept on its own it lifts accuracy by 20.8 points over No Memory.</p>
+        </div>
+        <figure class="bl-fig">
+          <button type="button" data-lightbox="assets/blog/transfer.webp" data-cap="Cross-Domain Transfer for the three GPT-5 sizes: drop-one (top) and keep-only (bottom)."><img src="assets/blog/transfer.webp" width="2000" height="1129" loading="lazy" alt="Heat maps for gpt-5, gpt-5-mini and gpt-5-nano: accuracy change per question domain when one lifestyle domain is dropped (top) or kept alone (bottom); the diagonal is outlined."></button>
+          <figcaption><b>Figure 4.</b> Same-domain accuracy change for each GPT-5 size. Top: drop one domain, against the long trajectory. Bottom: keep only one domain, against No Memory. The outlined diagonal is the same-domain effect.</figcaption>
+        </figure>
+      </section>
+    </article>
+
+    <div class="bl-end">
+      <a class="btn btn-primary" href="https://openreview.net/forum?id=yGQt9wAGkS"><svg><use href="#i-paper"/></svg>Read the paper</a>
+      <a class="btn" href="index.html#leaderboard">Leaderboard</a>
+      <a class="btn" href="dataset.html">Dataset</a>
+      <a class="btn" href="tasks.html">Tasks</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <div><b style="color:var(--ink)">JARVIS-Bench</b> · NeurIPS 2026 Evaluations &amp; Datasets Track</div>
+    <div>Data CC BY-NC 4.0 · Code MIT · <a href="https://github.com/AgentMemoryWorld/JARVIS-Bench">GitHub</a> · <a href="https://openreview.net/forum?id=yGQt9wAGkS">OpenReview</a></div>
+  </div>
+  <div class="container credits"><details><summary>Image credits</summary><p>Illustrations: Open Peeps by Pablo Stanley (CC0). Photographs from Wikimedia Commons, cropped, resized and colour-toned for this site; adaptations of CC BY-SA photographs are shared under the same licence. Institution and model logos are trademarks of their owners.</p><ul><li><a href="https://commons.wikimedia.org/wiki/File:Christchurch_art_gallery_interior.jpg">Christchurch art gallery interior</a> by Sgerbic, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Reading_mail_at_night_(Unsplash).jpg">Reading mail at night (Unsplash)</a> by Jay Wennington, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Late_autumn_rainy_night_in_Moscow_(54889230493).jpg">Late autumn rainy night in Moscow (54889230493)</a> by kishjar?, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Park_na_%C5%9Aroduli,_Sosnowiec,_Jesie%C5%84_2021.jpg">Park na Środuli, Sosnowiec, Jesień 2021</a> by Krzysztof Popławski, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li></ul></details></div>
+</footer>
+
+<div class="lightbox" id="lightbox"><div><img alt=""><div class="cap"></div></div></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/logos.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

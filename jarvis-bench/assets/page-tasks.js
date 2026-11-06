@@ -85,7 +85,7 @@
   }
 
   /* ---------- 02 · the proactive pool, and per-user mean versus pooled F1 ----------
-     Pool: 254 anchors, 111 positive, 143 negative, 15 users (Section 4, Proactive Help protocol; Appendix N, user selection).
+     Pool: 254 anchors, 111 positive, 143 negative, from a subset of users (Section 4, Proactive Help protocol; Appendix N, user selection).
      F1 values: tab:proactive via assets/data.js. */
   const waffle = $("#viz-waffle");
   if (waffle) {
@@ -100,7 +100,7 @@
     const x = scale(0, 80), ticks = [0, 20, 40, 60, 80];
     const rows = [...D.proactive].sort((a, b) => b.text.pF1 - a.text.pF1);
     let h = `<div class="tk-rc tk-rc-dumb" style="--grid-img:${grid(x, ticks)}">`
-      + head(["Model", `F1, % &middot; <i class="tk-key hollow"></i>per-user mean, 15 users &nbsp; <i class="tk-key dot"></i>pooled, 254 anchors`, "user|v", "pool|v"]);
+      + head(["Model", `F1, % &middot; <i class="tk-key hollow"></i>per-user mean &nbsp; <i class="tk-key dot"></i>pooled, 254 anchors`, "user|v", "pool|v"]);
     rows.forEach(r => {
       const u = r.text.uF1, p = r.text.pF1;
       h += `<div class="tk-rc-l">${esc(r.name)}<small>${esc(r.family)} family</small></div>

@@ -29,6 +29,7 @@
     <a class="brand" href="index.html"><img src="assets/mark-sm.svg" alt=""><span>JARVIS<span class="b2">-Bench</span></span></a>
     <nav class="nav-links">
       <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="blog.html">Blog</a>
       <a href="dataset.html" class="active">Dataset</a>
       <a href="tasks.html">Tasks</a>
     </nav>
@@ -48,7 +49,7 @@
       <div>
         <div class="ds-people top" aria-hidden="true"><div class="pp"><img src="assets/peeps/p1.svg" alt=""></div><div class="pp"><img src="assets/peeps/p2.svg" alt=""></div><div class="pp"><img src="assets/peeps/p3.svg" alt=""></div><div class="pp"><img src="assets/peeps/p4.svg" alt=""></div><div class="pp"><img src="assets/peeps/p5.svg" alt=""></div><div class="pp"><img src="assets/peeps/p6.svg" alt=""></div><div class="pp"><img src="assets/peeps/p7.svg" alt=""></div><div class="pp"><img src="assets/peeps/p8.svg" alt=""></div></div>
         <span class="eyebrow">Dataset</span>
-        <h2>42 people, logged day&nbsp;by&nbsp;day</h2>
+        <h2>Real people, logged day&nbsp;by&nbsp;day</h2>
         <p class="intro">Participants logged their own days through a custom mobile app for 28 to 44 days: wake-ups, meals, exercise, naps, bedtime, often with a photo and a mood note. Each released trajectory keeps those entries verbatim, wraps them in clue-planted synthetic events, and was confirmed by the participant.</p>
         <div class="ds-actions">
           <a class="btn btn-primary" href="https://doi.org/10.7910/DVN/8UKMK1"><svg><use href="#i-db"/></svg>Download the data</a>
@@ -70,7 +71,7 @@
     </div>
 
     <div class="ds-stats">
-      <div class="ds-stat"><div class="v">42</div><div class="k">participants released, of 70 enrolled</div></div>
+      <div class="ds-stat"><div class="v">3</div><div class="k">checks before release, the last by the participant</div></div>
       <div class="ds-stat"><div class="v">28<small>–</small>44</div><div class="k">days logged per participant</div></div>
       <div class="ds-stat"><div class="v"><small>~</small>440</div><div class="k">events per participant, about half anchor</div></div>
       <div class="ds-stat"><div class="v">18,471</div><div class="k">events in the release, about 3.17M tokens</div></div>
@@ -105,7 +106,7 @@
       </div>
     </div>
 
-    <div class="ds-kicker">Who the 42 are</div>
+    <div class="ds-kicker">Who took part</div>
     <!-- participant diversity: Appendix L (L_Participant_Diversity.tex), caption of fig:participant-diversity. Region USA 75, Southeast Asia 9, Europe 5, China 5, Other 7;
          language English 51, Chinese 40, Korean 3, Other 6; sleep bucket Deep night 69, Late night 22, Early morning 7, Other 2; productive period Afternoon 58, Morning 24, Evening 16, Other 2;
          work style Hybrid 62, Independent 38; exercise goals Health 40, Stress relief 33, Fitness 19, Muscle gain 7, Other 2. Bases vary by axis (optional questions). -->
@@ -328,36 +329,36 @@
       <!-- /gen:anchor_table -->
         </tbody></table></div><p class="tn">Implicit Preference accuracy, %. anchor = anchor-only trajectory; Δ = anchor-only − full, in points.</p></details>
       </div>
-      <!-- synthesizer swap: Appendix N (N_Validation_Analyses.tex), tab:resynth. Lifelong Memory (C4) accuracy under (a) 42 users GPT synthesis, (b) random 15 users GPT synthesis,
-           (c) the same 15 users re-synthesised with Qwen3.6-Plus: Gemini-3-Pro .675/.688/.641; Qwen3.6-27B .655/.640/.622; Gemma-4-31B .652/.636/.618; Claude-Sonnet-4.6 .631/.630/.598; GPT-5 .585/.595/.551.
+      <!-- synthesizer swap: Appendix N (N_Validation_Analyses.tex), tab:resynth. Lifelong Memory (C4) accuracy under (a) all users, GPT synthesis, (b) a random subset of users, GPT synthesis,
+           (c) the same subset re-synthesised with Qwen3.6-Plus: Gemini-3-Pro .675/.688/.641; Qwen3.6-27B .655/.640/.622; Gemma-4-31B .652/.636/.618; Claude-Sonnet-4.6 .631/.630/.598; GPT-5 .585/.595/.551.
            The synthesizer of the release is gpt-5-mini. One HTML chart with fixed pixel text: the right column carries rank, model and (c) − (b); below a
            530px card (container query) the names move to the key list under the chart and only the rank badges stay. -->
       <div class="ds-card ds-check">
-        <div class="ck-head"><span class="no">02</span><div><h3>Not tied to one generator</h3><p>Re-synthesising 15 users with Qwen3.6-Plus instead of gpt-5-mini moves Lifelong Memory accuracy by at most 4.7 points, and the lines never cross: the five models rank the same in all three settings.</p></div></div>
+        <div class="ck-head"><span class="no">02</span><div><h3>Not tied to one generator</h3><p>Re-synthesising a random subset of users with Qwen3.6-Plus instead of gpt-5-mini moves Lifelong Memory accuracy by at most 4.7 points, and the lines never cross: the five models rank the same in all three settings.</p></div></div>
         <div class="ds-slope-wrap">
       <!-- gen:slope -->
 <div class="ds-slope" role="group" aria-label="Lifelong Memory accuracy of five models under three synthesis settings; the ranking is identical in all three" style="--ph:250px;--gut:22px">
-        <div class="sh"><div class="hd a"><b>(a) 42 users</b><span>gpt-5-mini</span></div><div class="hd b"><b>(b) <em class="lg">15 random users</em><em class="sm">15 users</em></b><span>gpt-5-mini</span></div><div class="hd c"><b>(c) same 15 users</b><span>Qwen3.6-Plus</span></div><div class="hd r">(c) − (b), pts</div></div>
+        <div class="sh"><div class="hd a"><b>(a) all users</b><span>gpt-5-mini</span></div><div class="hd b"><b>(b) <em class="lg">random subset</em><em class="sm">subset</em></b><span>gpt-5-mini</span></div><div class="hd c"><b>(c) same subset</b><span>Qwen3.6-Plus</span></div><div class="hd r">(c) − (b), pts</div></div>
         <div class="sp">
           <div class="yt" aria-hidden="true"><span style="top:234.4px">55</span><span style="top:156.2px">60</span><span style="top:78.1px">65</span><span style="top:0.0px">70</span></div>
           <div class="pl">
             <div class="band" aria-hidden="true"><span>synthesizer swapped</span></div><i class="g" style="top:234.4px"></i><i class="g" style="top:156.2px"></i><i class="g" style="top:78.1px"></i><i class="g" style="top:0.0px"></i>
             <svg class="ln" viewBox="0 0 1000 250" preserveAspectRatio="none" aria-hidden="true"><polyline class="s" points="0,39.1 500,18.8 1000,92.2" data-m="Gemini-3-Pro" vector-effect="non-scaling-stroke"/><polyline class="s" points="0,70.3 500,93.8 1000,121.9" data-m="Qwen3.6-27B" vector-effect="non-scaling-stroke"/><polyline class="s" points="0,75.0 500,100.0 1000,128.1" data-m="Gemma-4-31B" vector-effect="non-scaling-stroke"/><polyline class="s" points="0,107.8 500,109.4 1000,159.4" data-m="Claude-Sonnet-4.6" vector-effect="non-scaling-stroke"/><polyline class="s" points="0,179.7 500,164.1 1000,232.8" data-m="GPT-5" vector-effect="non-scaling-stroke"/><polyline class="hs" points="0,39.1 500,18.8 1000,92.2" data-m="Gemini-3-Pro" vector-effect="non-scaling-stroke"/><polyline class="hs" points="0,70.3 500,93.8 1000,121.9" data-m="Qwen3.6-27B" vector-effect="non-scaling-stroke"/><polyline class="hs" points="0,75.0 500,100.0 1000,128.1" data-m="Gemma-4-31B" vector-effect="non-scaling-stroke"/><polyline class="hs" points="0,107.8 500,109.4 1000,159.4" data-m="Claude-Sonnet-4.6" vector-effect="non-scaling-stroke"/><polyline class="hs" points="0,179.7 500,164.1 1000,232.8" data-m="GPT-5" vector-effect="non-scaling-stroke"/></svg>
-            <span class="hit" tabindex="0" role="img" aria-label="Gemini-3-Pro, (a) 42 users, gpt-5-mini: 67.5%" style="left:0%;top:39.1px" data-m="Gemini-3-Pro" data-k="a" data-va="67.5" data-vb="68.8" data-vc="64.1" data-d="−4.7"></span><i class="p" style="left:0%;top:39.1px" data-m="Gemini-3-Pro"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Gemini-3-Pro, (b) 15 random users, gpt-5-mini: 68.8%" style="left:50%;top:18.8px" data-m="Gemini-3-Pro" data-k="b" data-va="67.5" data-vb="68.8" data-vc="64.1" data-d="−4.7"></span><i class="p" style="left:50%;top:18.8px" data-m="Gemini-3-Pro"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Gemini-3-Pro, (c) same 15 users, Qwen3.6-Plus: 64.1%" style="left:100%;top:92.2px" data-m="Gemini-3-Pro" data-k="c" data-va="67.5" data-vb="68.8" data-vc="64.1" data-d="−4.7"></span><i class="p" style="left:100%;top:92.2px" data-m="Gemini-3-Pro"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Qwen3.6-27B, (a) 42 users, gpt-5-mini: 65.5%" style="left:0%;top:70.3px" data-m="Qwen3.6-27B" data-k="a" data-va="65.5" data-vb="64.0" data-vc="62.2" data-d="−1.8"></span><i class="p" style="left:0%;top:70.3px" data-m="Qwen3.6-27B"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Qwen3.6-27B, (b) 15 random users, gpt-5-mini: 64.0%" style="left:50%;top:93.8px" data-m="Qwen3.6-27B" data-k="b" data-va="65.5" data-vb="64.0" data-vc="62.2" data-d="−1.8"></span><i class="p" style="left:50%;top:93.8px" data-m="Qwen3.6-27B"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Qwen3.6-27B, (c) same 15 users, Qwen3.6-Plus: 62.2%" style="left:100%;top:121.9px" data-m="Qwen3.6-27B" data-k="c" data-va="65.5" data-vb="64.0" data-vc="62.2" data-d="−1.8"></span><i class="p" style="left:100%;top:121.9px" data-m="Qwen3.6-27B"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Gemma-4-31B, (a) 42 users, gpt-5-mini: 65.2%" style="left:0%;top:75.0px" data-m="Gemma-4-31B" data-k="a" data-va="65.2" data-vb="63.6" data-vc="61.8" data-d="−1.8"></span><i class="p" style="left:0%;top:75.0px" data-m="Gemma-4-31B"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Gemma-4-31B, (b) 15 random users, gpt-5-mini: 63.6%" style="left:50%;top:100.0px" data-m="Gemma-4-31B" data-k="b" data-va="65.2" data-vb="63.6" data-vc="61.8" data-d="−1.8"></span><i class="p" style="left:50%;top:100.0px" data-m="Gemma-4-31B"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Gemma-4-31B, (c) same 15 users, Qwen3.6-Plus: 61.8%" style="left:100%;top:128.1px" data-m="Gemma-4-31B" data-k="c" data-va="65.2" data-vb="63.6" data-vc="61.8" data-d="−1.8"></span><i class="p" style="left:100%;top:128.1px" data-m="Gemma-4-31B"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Claude-Sonnet-4.6, (a) 42 users, gpt-5-mini: 63.1%" style="left:0%;top:107.8px" data-m="Claude-Sonnet-4.6" data-k="a" data-va="63.1" data-vb="63.0" data-vc="59.8" data-d="−3.2"></span><i class="p" style="left:0%;top:107.8px" data-m="Claude-Sonnet-4.6"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Claude-Sonnet-4.6, (b) 15 random users, gpt-5-mini: 63.0%" style="left:50%;top:109.4px" data-m="Claude-Sonnet-4.6" data-k="b" data-va="63.1" data-vb="63.0" data-vc="59.8" data-d="−3.2"></span><i class="p" style="left:50%;top:109.4px" data-m="Claude-Sonnet-4.6"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="Claude-Sonnet-4.6, (c) same 15 users, Qwen3.6-Plus: 59.8%" style="left:100%;top:159.4px" data-m="Claude-Sonnet-4.6" data-k="c" data-va="63.1" data-vb="63.0" data-vc="59.8" data-d="−3.2"></span><i class="p" style="left:100%;top:159.4px" data-m="Claude-Sonnet-4.6"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="GPT-5, (a) 42 users, gpt-5-mini: 58.5%" style="left:0%;top:179.7px" data-m="GPT-5" data-k="a" data-va="58.5" data-vb="59.5" data-vc="55.1" data-d="−4.4"></span><i class="p" style="left:0%;top:179.7px" data-m="GPT-5"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="GPT-5, (b) 15 random users, gpt-5-mini: 59.5%" style="left:50%;top:164.1px" data-m="GPT-5" data-k="b" data-va="58.5" data-vb="59.5" data-vc="55.1" data-d="−4.4"></span><i class="p" style="left:50%;top:164.1px" data-m="GPT-5"></i>
-            <span class="hit" tabindex="0" role="img" aria-label="GPT-5, (c) same 15 users, Qwen3.6-Plus: 55.1%" style="left:100%;top:232.8px" data-m="GPT-5" data-k="c" data-va="58.5" data-vb="59.5" data-vc="55.1" data-d="−4.4"></span><i class="p" style="left:100%;top:232.8px" data-m="GPT-5"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Gemini-3-Pro, (a) all users, gpt-5-mini: 67.5%" style="left:0%;top:39.1px" data-m="Gemini-3-Pro" data-k="a" data-va="67.5" data-vb="68.8" data-vc="64.1" data-d="−4.7"></span><i class="p" style="left:0%;top:39.1px" data-m="Gemini-3-Pro"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Gemini-3-Pro, (b) random subset, gpt-5-mini: 68.8%" style="left:50%;top:18.8px" data-m="Gemini-3-Pro" data-k="b" data-va="67.5" data-vb="68.8" data-vc="64.1" data-d="−4.7"></span><i class="p" style="left:50%;top:18.8px" data-m="Gemini-3-Pro"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Gemini-3-Pro, (c) same subset, Qwen3.6-Plus: 64.1%" style="left:100%;top:92.2px" data-m="Gemini-3-Pro" data-k="c" data-va="67.5" data-vb="68.8" data-vc="64.1" data-d="−4.7"></span><i class="p" style="left:100%;top:92.2px" data-m="Gemini-3-Pro"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Qwen3.6-27B, (a) all users, gpt-5-mini: 65.5%" style="left:0%;top:70.3px" data-m="Qwen3.6-27B" data-k="a" data-va="65.5" data-vb="64.0" data-vc="62.2" data-d="−1.8"></span><i class="p" style="left:0%;top:70.3px" data-m="Qwen3.6-27B"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Qwen3.6-27B, (b) random subset, gpt-5-mini: 64.0%" style="left:50%;top:93.8px" data-m="Qwen3.6-27B" data-k="b" data-va="65.5" data-vb="64.0" data-vc="62.2" data-d="−1.8"></span><i class="p" style="left:50%;top:93.8px" data-m="Qwen3.6-27B"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Qwen3.6-27B, (c) same subset, Qwen3.6-Plus: 62.2%" style="left:100%;top:121.9px" data-m="Qwen3.6-27B" data-k="c" data-va="65.5" data-vb="64.0" data-vc="62.2" data-d="−1.8"></span><i class="p" style="left:100%;top:121.9px" data-m="Qwen3.6-27B"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Gemma-4-31B, (a) all users, gpt-5-mini: 65.2%" style="left:0%;top:75.0px" data-m="Gemma-4-31B" data-k="a" data-va="65.2" data-vb="63.6" data-vc="61.8" data-d="−1.8"></span><i class="p" style="left:0%;top:75.0px" data-m="Gemma-4-31B"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Gemma-4-31B, (b) random subset, gpt-5-mini: 63.6%" style="left:50%;top:100.0px" data-m="Gemma-4-31B" data-k="b" data-va="65.2" data-vb="63.6" data-vc="61.8" data-d="−1.8"></span><i class="p" style="left:50%;top:100.0px" data-m="Gemma-4-31B"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Gemma-4-31B, (c) same subset, Qwen3.6-Plus: 61.8%" style="left:100%;top:128.1px" data-m="Gemma-4-31B" data-k="c" data-va="65.2" data-vb="63.6" data-vc="61.8" data-d="−1.8"></span><i class="p" style="left:100%;top:128.1px" data-m="Gemma-4-31B"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Claude-Sonnet-4.6, (a) all users, gpt-5-mini: 63.1%" style="left:0%;top:107.8px" data-m="Claude-Sonnet-4.6" data-k="a" data-va="63.1" data-vb="63.0" data-vc="59.8" data-d="−3.2"></span><i class="p" style="left:0%;top:107.8px" data-m="Claude-Sonnet-4.6"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Claude-Sonnet-4.6, (b) random subset, gpt-5-mini: 63.0%" style="left:50%;top:109.4px" data-m="Claude-Sonnet-4.6" data-k="b" data-va="63.1" data-vb="63.0" data-vc="59.8" data-d="−3.2"></span><i class="p" style="left:50%;top:109.4px" data-m="Claude-Sonnet-4.6"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="Claude-Sonnet-4.6, (c) same subset, Qwen3.6-Plus: 59.8%" style="left:100%;top:159.4px" data-m="Claude-Sonnet-4.6" data-k="c" data-va="63.1" data-vb="63.0" data-vc="59.8" data-d="−3.2"></span><i class="p" style="left:100%;top:159.4px" data-m="Claude-Sonnet-4.6"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="GPT-5, (a) all users, gpt-5-mini: 58.5%" style="left:0%;top:179.7px" data-m="GPT-5" data-k="a" data-va="58.5" data-vb="59.5" data-vc="55.1" data-d="−4.4"></span><i class="p" style="left:0%;top:179.7px" data-m="GPT-5"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="GPT-5, (b) random subset, gpt-5-mini: 59.5%" style="left:50%;top:164.1px" data-m="GPT-5" data-k="b" data-va="58.5" data-vb="59.5" data-vc="55.1" data-d="−4.4"></span><i class="p" style="left:50%;top:164.1px" data-m="GPT-5"></i>
+            <span class="hit" tabindex="0" role="img" aria-label="GPT-5, (c) same subset, Qwen3.6-Plus: 55.1%" style="left:100%;top:232.8px" data-m="GPT-5" data-k="c" data-va="58.5" data-vb="59.5" data-vc="55.1" data-d="−4.4"></span><i class="p" style="left:100%;top:232.8px" data-m="GPT-5"></i>
           </div>
           <svg class="gt" viewBox="0 0 22 250" preserveAspectRatio="none" aria-hidden="true"><path class="ld" d="M0,92.2 L11,92.2 L22,92.2" vector-effect="non-scaling-stroke"/><path class="ld" d="M0,121.9 L11,121.9 L22,121.9" vector-effect="non-scaling-stroke"/><path class="ld" d="M0,128.1 L11,145.9 L22,145.9" vector-effect="non-scaling-stroke"/><path class="ld" d="M0,159.4 L11,169.9 L22,169.9" vector-effect="non-scaling-stroke"/><path class="ld" d="M0,232.8 L11,232.8 L22,232.8" vector-effect="non-scaling-stroke"/></svg>
           <div class="lc"><div class="lbl" style="top:82.2px" data-m="Gemini-3-Pro"><i class="rk">1</i><span class="lb">Gemini-3-Pro</span><b class="d">−4.7</b></div><div class="lbl" style="top:111.9px" data-m="Qwen3.6-27B"><i class="rk">2</i><span class="lb">Qwen3.6-27B</span><b class="d">−1.8</b></div><div class="lbl" style="top:135.9px" data-m="Gemma-4-31B"><i class="rk">3</i><span class="lb">Gemma-4-31B</span><b class="d">−1.8</b></div><div class="lbl" style="top:159.9px" data-m="Claude-Sonnet-4.6"><i class="rk">4</i><span class="lb">Claude-Sonnet-4.6</span><b class="d">−3.2</b></div><div class="lbl" style="top:222.8px" data-m="GPT-5"><i class="rk">5</i><span class="lb">GPT-5</span><b class="d">−4.4</b></div></div>
@@ -367,7 +368,7 @@
       <!-- /gen:slope -->
         </div>
         <div class="ds-legend small col"><span>Lifelong Memory (C4) accuracy, % · chance is 25%</span><span>Ranks 2 and 3 sit 0.3 to 0.4 points apart in every setting; the paper reads them as a tie (Qwen3.6-27B ≈ Gemma-4-31B).</span></div>
-        <details class="ds-tbl"><summary>Table</summary><div class="tw"><table><thead><tr><th>Model</th><th>(a) 42 users<br><span class="nb">gpt-5-mini</span></th><th>(b) 15 random users<br><span class="nb">gpt-5-mini</span></th><th>(c) same 15 users<br><span class="nb">Qwen3.6-Plus</span></th><th><span class="nb">(c) − (b)</span></th></tr></thead><tbody>
+        <details class="ds-tbl"><summary>Table</summary><div class="tw"><table><thead><tr><th>Model</th><th>(a) all users<br><span class="nb">gpt-5-mini</span></th><th>(b) random subset<br><span class="nb">gpt-5-mini</span></th><th>(c) same subset<br><span class="nb">Qwen3.6-Plus</span></th><th><span class="nb">(c) − (b)</span></th></tr></thead><tbody>
       <!-- gen:slope_table -->
 <tr><td>Gemini-3-Pro</td><td>67.5</td><td>68.8</td><td>64.1</td><td>−4.7</td></tr>
 <tr><td>Qwen3.6-27B</td><td>65.5</td><td>64.0</td><td>62.2</td><td>−1.8</td></tr>
@@ -407,7 +408,7 @@
          fig:composition-tokens (token-weighted shares of ~3.17M tokens: 22.8, 16.4, 15.9, 15.1, 12.4, 9.2, 8.2). Bars are scaled so that 25% fills the track. -->
     <div class="ds-card ds-comp">
       <div class="ds-comp-head">
-        <div class="ds-card-title">Share of the release by lifestyle domain<span>18,471 events and about 3.17M tokens across the 42 participants</span></div>
+        <div class="ds-card-title">Share of the release by lifestyle domain<span>18,471 events and about 3.17M tokens in the release</span></div>
         <span class="ds-tag">Appendix B</span>
       </div>
       <div class="ds-comp-rows">
@@ -447,8 +448,8 @@
             <ul>
               <li><div class="r"><span class="nm zip">User.zip</span></div>
                 <ul>
-                  <!-- listing of the released User.zip, 2026-11-05: 42 complete folders, 3 partial (persona and logs only) -->
-                  <li><div class="r"><span class="nm dir">User/&lt;user&gt;/</span><span class="d">42 participants, one folder each</span></div>
+                  <!-- listing of the released User.zip, 2026-11-05: complete participant folders plus a few partial ones (persona and logs only) -->
+                  <li><div class="r"><span class="nm dir">User/&lt;user&gt;/</span><span class="d">one folder per participant</span></div>
                     <ul>
                       <li><div class="r"><span class="nm">synthetic_trajectory.json</span><span class="d">the trajectory</span></div></li>
                       <li><div class="r"><span class="nm">profile_persona.json</span><span class="d">profile + survey insight</span></div></li>
@@ -474,7 +475,7 @@
       <div class="ds-stack">
         <div class="ds-card ds-res">
           <div class="hd"><h3>Dataset</h3><div class="meta">Harvard Dataverse · doi:10.7910/DVN/8UKMK1 · CC BY-NC 4.0</div></div>
-          <p>Trajectories, personas, skeletons and photographs for the 42 participants.</p>
+          <p>Trajectories, personas, skeletons and photographs for every released participant.</p>
           <div class="row"><a class="btn btn-sm btn-primary" href="https://doi.org/10.7910/DVN/8UKMK1"><svg><use href="#i-db"/></svg>Harvard Dataverse</a></div>
         </div>
         <div class="ds-card ds-res">

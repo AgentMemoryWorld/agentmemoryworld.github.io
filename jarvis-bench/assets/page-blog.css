@@ -1,0 +1,30 @@
+/* Blog page: the paper's figures with short notes (src/blog.html). */
+.bl { max-width: 1100px; }
+.bl-head { max-width: 760px; }
+.bl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 16px; font: 500 12px/1.4 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.bl-meta a { color: var(--pro); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+.bl-post { display: grid; gap: 64px; margin-top: 48px; }
+.bl-sec { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 20px; }
+.bl-n { align-self: start; padding-top: 8px; border-top: 2px solid var(--ink); font: 500 13px/1 var(--f-mono); letter-spacing: .04em; color: var(--ink-3); }
+.bl-txt h3 { margin: 0 0 12px; font: 800 26px/1.22 var(--f-head); letter-spacing: -.02em; color: var(--ink); }
+.bl-txt p { margin: 0; max-width: 720px; font-size: 16.5px; line-height: 1.72; color: var(--ink-2); }
+
+.bl-fig { grid-column: 1 / -1; margin: 26px 0 0; padding: 18px 18px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+.bl-fig button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.bl-fig img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.bl-fig figcaption { margin: 14px 4px 0; font-size: 13.5px; line-height: 1.6; color: var(--ink-3); }
+.bl-fig figcaption b { color: var(--ink); font-weight: 700; }
+.bl-fig figcaption a { color: var(--ink-2); }
+
+.bl-end { display: flex; flex-wrap: wrap; gap: 10px; margin: 64px 0 0 84px; }
+
+@media (max-width: 620px) {
+  .bl-post { gap: 44px; margin-top: 32px; }
+  .bl-sec { grid-template-columns: 1fr; }
+  .bl-n { width: 44px; margin-bottom: 12px; }
+  .bl-txt h3 { font-size: 21px; }
+  .bl-txt p { font-size: 15.5px; }
+  .bl-fig { padding: 10px 10px 12px; border-radius: 14px; }
+  .bl-end { margin-left: 0; }
+}

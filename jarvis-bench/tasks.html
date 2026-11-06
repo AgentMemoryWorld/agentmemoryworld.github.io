@@ -29,6 +29,7 @@
     <a class="brand" href="index.html"><img src="assets/mark-sm.svg" alt=""><span>JARVIS<span class="b2">-Bench</span></span></a>
     <nav class="nav-links">
       <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="blog.html">Blog</a>
       <a href="dataset.html">Dataset</a>
       <a href="tasks.html" class="active">Tasks</a>
     </nav>
@@ -195,7 +196,7 @@
           <h3>Implicit Preference Reasoning</h3>
           <p>What does the user prefer?</p>
         </div>
-        <div class="tk-pool"><div class="tk-stat"><b>42</b><span>users</span></div><div class="tk-stat"><b>100</b><span>questions each</span></div><div class="tk-stat"><b>54</b><span>models</span></div></div>
+        <div class="tk-pool"><div class="tk-stat"><b>5</b><span>memory levels</span></div><div class="tk-stat"><b>100</b><span>questions each</span></div><div class="tk-stat"><b>54</b><span>models</span></div></div>
       </header>
       <div class="tk-task-body">
         <ol class="tk-spec">
@@ -264,7 +265,7 @@
           <h3>Proactive Help Prediction</h3>
           <p>Should the agent step in now?</p>
         </div>
-        <div class="tk-pool"><div class="tk-stat"><b>254</b><span>anchor events</span></div><div class="tk-stat"><b>15</b><span>users</span></div><div class="tk-stat"><b>111</b><span>marked “needs help”</span></div></div>
+        <div class="tk-pool"><div class="tk-stat"><b>254</b><span>anchor events</span></div><div class="tk-stat"><b>2</b><span>inputs: text or photo</span></div><div class="tk-stat"><b>111</b><span>marked “needs help”</span></div></div>
       </header>
       <div class="tk-task-body">
         <ol class="tk-spec">
@@ -307,18 +308,18 @@
           </div>
         </div>
       </div>
-      <!-- What the benchmark found. Numbers: the pool of 254 anchors with 111 positive and 143 negative over 15 users is Section 4
+      <!-- What the benchmark found. Numbers: the pool of 254 anchors with 111 positive and 143 negative over a subset of users is Section 4
            (Proactive Help protocol, Sections/04_Result.tex) and Appendix N sec:app-val-selection; per-user versus pooled F1 for the ten
            models is tab:proactive (assets/data.js); the up-to-forty-point gap is computed from those values (Qwen3.6-Plus: 26.8 vs 66.4). -->
       <div class="tk-find">
         <div class="tk-find-head">
           <span class="tk-find-k">What the benchmark found</span>
           <h4>Two aggregates of the same pool can sit forty points apart</h4>
-          <p>The participants flagged 111 of the 254 anchors as moments to step in. Anchors are spread unevenly over the 15 users, so a model's per-user mean F1 and its pooled F1 can differ by up to forty points. The paper therefore reports both for every model.</p>
+          <p>The participants flagged 111 of the 254 anchors as moments to step in. Anchors are spread unevenly over the users, so a model's per-user mean F1 and its pooled F1 can differ by up to forty points. The paper therefore reports both for every model.</p>
         </div>
         <div class="tk-viz-grid">
           <div>
-            <div class="tk-viz-t">The pool<small>254 anchor events with a photograph and a reason, from 15 users</small></div>
+            <div class="tk-viz-t">The pool<small>254 anchor events with a photograph and a reason, from a subset of users</small></div>
             <div class="tk-viz" id="viz-waffle"></div>
           </div>
           <div>
@@ -337,7 +338,7 @@
           <h3>Emotion-Aware Modeling</h3>
           <p>How does the user feel?</p>
         </div>
-        <div class="tk-pool"><div class="tk-stat"><b>123</b><span>events</span></div><div class="tk-stat"><b>15</b><span>users</span></div><div class="tk-stat"><b>78 · 22 · 23</b><span>positive · negative · mixed</span></div></div>
+        <div class="tk-pool"><div class="tk-stat"><b>123</b><span>events</span></div><div class="tk-stat"><b>2</b><span>inputs: text or photo</span></div><div class="tk-stat"><b>78 · 22 · 23</b><span>positive · negative · mixed</span></div></div>
       </header>
       <div class="tk-task-body">
         <ol class="tk-spec">

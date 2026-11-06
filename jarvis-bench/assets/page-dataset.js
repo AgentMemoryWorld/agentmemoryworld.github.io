@@ -59,7 +59,7 @@
 
   // 02 slope: the nearest dot within 24px wins (dots 0.3 points apart overlap); a line, a label row or a key-list row stands for its model
   // at the (c) end; the tooltip opens on the left of the pointer in the (c) column so it never covers the names. Tab reaches every dot.
-  const SETTING = { a: "(a) 42 users, gpt-5-mini", b: "(b) 15 random users, gpt-5-mini", c: "(c) same 15 users, Qwen3.6-Plus" };
+  const SETTING = { a: "(a) all users, gpt-5-mini", b: "(b) random subset, gpt-5-mini", c: "(c) same subset, Qwen3.6-Plus" };
   slopes.forEach(root => {
     const key = root.parentElement.querySelector(".ds-slope-key");
     const marks = [...root.querySelectorAll("[data-m]"), ...(key ? key.querySelectorAll("[data-m]") : [])];

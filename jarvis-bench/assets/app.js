@@ -31,12 +31,16 @@
   const mxLockup = d => PARTNER ? `<a class="mx" href="${PARTNER.url}" title="${esc(PARTNER.name)}"><img src="assets/logos/${PARTNER.file}" alt="" width="${d}" height="${d}"><b>${esc(PARTNER.name)}</b></a>` : "";
 
   /* ---------- hero logo strip ---------- */
-  const HERO = ["uic", "nvidia", "google-research", "meta", "amazon", "salesforce", "cambridge", "cornell"];
+  const INDUSTRY = ["nvidia", "google-research", "meta", "amazon", "salesforce", "capitalone", "roblox"];  // shown first, larger, not scrolling
+  const isIndustry = l => INDUSTRY.includes(l.slug);
+  const industryFirst = [...INDUSTRY.map(s => LOGOS.find(l => l.slug === s)).filter(Boolean), ...LOGOS.filter(l => !isIndustry(l))];
   const heroBox = $("#hero-logos");
   if (heroBox && LOGOS.length) {
     const bySlug = Object.fromEntries(LOGOS.map(l => [l.slug, l]));
-    const order = [...HERO, ...LOGOS.map(l => l.slug).filter(s => !HERO.includes(s))];
-    const set = mxLockup(26) + order.filter(s => bySlug[s]).map(s => logoImg(bySlug[s], fit(bySlug[s].w, bySlug[s].h, 2300, 30, 132, 15))).join("");
+    const ind = $("#hero-industry");
+    if (ind) ind.innerHTML = mxLockup(30) + INDUSTRY.filter(s => bySlug[s]).map(s => logoImg(bySlug[s], fit(bySlug[s].w, bySlug[s].h, 3000, 32, 140, 18))).join("");
+    const rest = LOGOS.filter(l => !(ind && isIndustry(l)));  // with the industry row on the page, the marquee carries the universities
+    const set = (ind ? "" : mxLockup(26)) + rest.map(l => logoImg(l, fit(l.w, l.h, 2300, 30, 132, 15))).join("");
     heroBox.innerHTML = `<div class="marquee"><div class="track"><div class="set">${set}</div><div class="set" aria-hidden="true">${set}</div></div></div>`;
   }
 
@@ -92,13 +96,13 @@
   const iprVal = (r, k) => (k === "avg" ? r.avg : r.c[+k.slice(1)]);
   const TEN = {
     proactive: {
-      note: "F1 (%) on whether the participant wanted help. Pooled over 254 anchors (111 positive); per-user mean over 15 users.",
+      note: "F1 (%) on whether the participant wanted help. Pooled over 254 anchors (111 positive), and as a per-user mean.",
       cols: [["text.pF1", "Text", "pooled F1"], ["image.pF1", "Photo", "pooled F1"], ["d.pF1", "Δ", "photo − text"],
              ["text.uF1", "Text", "per-user F1"], ["image.uF1", "Photo", "per-user F1"], ["d.uF1", "Δ", "photo − text"]],
       key: "text.pF1",
     },
     emotion: {
-      note: "Pooled over 123 events; per-user mean over 15 users. Mood-F1 is multi-label; polarity is 3-class accuracy.",
+      note: "Pooled over 123 events, and as a per-user mean. Mood-F1 is multi-label; polarity is 3-class accuracy.",
       cols: [["text.pMood", "Text", "pooled mood-F1"], ["image.pMood", "Photo", "pooled mood-F1"], ["d.pMood", "Δ", "photo − text"],
              ["text.pPol", "Text", "pooled polarity"], ["image.pPol", "Photo", "pooled polarity"], ["d.pPol", "Δ", "photo − text"]],
       key: "text.pMood",
@@ -198,7 +202,7 @@
   }
   const wall = $("#wall");
   if (wall) {
-    wall.innerHTML = mxLockup(34) + LOGOS.map(l => {
+    wall.innerHTML = mxLockup(34) + industryFirst.map(l => {
       const wide = l.w / l.h > 8;
       const s = fit(l.w, l.h, 3000, 40, wide ? 150 : 128, wide ? 11 : 15);
       return `<a title="${esc(l.name)}">${logoImg(l, s)}</a>`;
