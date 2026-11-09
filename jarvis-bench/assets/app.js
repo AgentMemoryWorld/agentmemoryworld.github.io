@@ -195,7 +195,8 @@
   if (authorsBox) {
     authorsBox.innerHTML = A.map((a, i) => {
       const marks = a.aff.join(",") + (a.equal ? ",*" : "") + (a.corr ? ",†" : "");
-      return `<span class="a">${esc(a.name)}<sup>${marks}</sup></span>${i < A.length - 1 ? '<span class="sep">·</span>' : ""}`;
+      const name = a.url ? `<a href="${esc(a.url)}">${esc(a.name)}</a>` : esc(a.name);
+      return `<span class="a">${name}<sup>${marks}</sup></span>${i < A.length - 1 ? '<span class="sep">·</span>' : ""}`;
     }).join(" ");
     const affBox = $("#affils");
     if (affBox) affBox.innerHTML = AF.map((n, i) => `<div><sup>${i + 1}</sup>${esc(n)}</div>`).join("");

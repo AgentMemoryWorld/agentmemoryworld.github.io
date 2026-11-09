@@ -7,3 +7,4 @@ Official assets downloaded without changing the artwork.
 - Purdue: https://www.purdue.edu/brand-studio/wp-content/uploads/2026/07/PU-H-logo-1024x512.jpg
 - Ohio State: https://www.osu.edu/assets/web/logo-web/TheOhioStateUniversity-HorizK-RGBHEX@2x.png
 - UCLA: https://www.ucla.edu/img/logo-ucla.svg (official white mark displayed on UCLA blue)
+- UT Austin: https://www.utexas.edu/themes/coresite/coretheme/images/logo.svg
