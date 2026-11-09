@@ -559,8 +559,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 44px; font-size: 13p
 .hero-band .marquee .set { gap: 56px; padding-right: 56px; }
 @media (max-width: 620px) { .hero-band { margin-top: 34px; } .hero-band .marquee .set { gap: 36px; padding-right: 36px; } }
 
-/* hero: the three leaderboard tasks in one row (Cross-Domain Transfer lives on the Tasks page) */
-.hero-tasks { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 22px; }
+/* hero: the four benchmark tasks in a two-by-two index; stack on phones */
 .hero-tasks a { border-bottom: 1px solid var(--line); }
 @media (max-width: 620px) { .hero-tasks { grid-template-columns: 1fr; } }
 
