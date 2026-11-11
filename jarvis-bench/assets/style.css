@@ -573,3 +573,6 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 44px; font-size: 13p
 
 /* The official UCLA white mark remains on a blue background. */
 .logo-img[src$="/ucla.svg"] { background: #2774AE; padding: 5px; box-sizing: content-box; }
+
+/* Official reversed UC Merced wordmark, displayed on university navy. */
+.logo-img[src$="/ucmerced.svg"] { background: #002856; padding: 5px; box-sizing: content-box; }

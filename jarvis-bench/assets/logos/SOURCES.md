@@ -8,3 +8,5 @@ Official assets downloaded without changing the artwork.
 - Ohio State: https://www.osu.edu/assets/web/logo-web/TheOhioStateUniversity-HorizK-RGBHEX@2x.png
 - UCLA: https://www.ucla.edu/img/logo-ucla.svg (official white mark displayed on UCLA blue)
 - UT Austin: https://www.utexas.edu/themes/coresite/coretheme/images/logo.svg
+
+- UC Merced: https://www.ucmerced.edu/ (official header wordmark SVG, unchanged; displayed on navy)

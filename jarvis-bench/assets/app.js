@@ -31,7 +31,7 @@
   const mxLockup = d => PARTNER ? `<a class="mx" href="${PARTNER.url}" title="${esc(PARTNER.name)}"><img src="assets/logos/${PARTNER.file}" alt="" width="${d}" height="${d}"><b>${esc(PARTNER.name)}</b></a>` : "";
 
   /* ---------- hero logo strip ---------- */
-  const INDUSTRY = ["nvidia", "google-research", "meta", "amazon", "salesforce", "capitalone", "roblox"];  // shown first, larger, not scrolling
+  const INDUSTRY = ["nvidia", "google-research", "amazon", "salesforce", "capitalone", "roblox"];  // shown first, larger, not scrolling
   const isIndustry = l => INDUSTRY.includes(l.slug);
   const industryFirst = [...INDUSTRY.map(s => LOGOS.find(l => l.slug === s)).filter(Boolean), ...LOGOS.filter(l => !isIndustry(l))];
   const heroBox = $("#hero-logos");
