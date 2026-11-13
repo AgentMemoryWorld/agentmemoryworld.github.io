@@ -52,7 +52,7 @@
         <h2>Real people, logged day&nbsp;by&nbsp;day</h2>
         <p class="intro">Participants logged their own days through a custom mobile app for 28 to 44 days: wake-ups, meals, exercise, naps, bedtime, often with a photo and a mood note. Each released trajectory keeps those entries verbatim, wraps them in clue-planted synthetic events, and was confirmed by the participant.</p>
         <div class="ds-actions">
-          <a class="btn btn-primary" href="https://doi.org/10.7910/DVN/8UKMK1"><svg><use href="#i-db"/></svg>Download the data</a>
+          <a class="btn btn-primary" href="https://huggingface.co/datasets/WZDavid/JARVIS-Bench"><svg><use href="#i-db"/></svg>Download the data</a>
           <a class="btn" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Code and answer key</a>
           <a class="btn" href="#release"><svg><use href="#i-down"/></svg>What is inside</a>
         </div>
@@ -74,7 +74,7 @@
       <div class="ds-stat"><div class="v">3</div><div class="k">checks before release, the last by the participant</div></div>
       <div class="ds-stat"><div class="v">28<small>–</small>44</div><div class="k">days logged per participant</div></div>
       <div class="ds-stat"><div class="v"><small>~</small>440</div><div class="k">events per participant, about half anchor</div></div>
-      <div class="ds-stat"><div class="v">18,471</div><div class="k">events in the release, about 3.17M tokens</div></div>
+      <div class="ds-stat"><div class="v">18,471</div><div class="k">events in the paper's evaluation set, about 3.17M tokens</div></div>
       <div class="ds-stat"><div class="v">12<small>→</small>8</div><div class="k">event subdomains into lifestyle domains</div></div>
       <div class="ds-stat"><div class="v">100</div><div class="k">survey questions per participant</div></div>
     </div>
@@ -180,7 +180,7 @@
             <div class="free"><div class="t">self-description, free text</div><i style="width:92%"></i><i style="width:84%"></i><i style="width:60%"></i></div>
           </div>
         </div>
-        <p class="ds-note">Written by the participant. Stage 1 of the synthesis distils it, together with the survey, into a profile and a deliberately vague survey insight, released as <code>profile_persona.json</code>.</p>
+        <p class="ds-note">Written by the participant. Stage 1 of the synthesis distils it, together with the survey, into a profile and a deliberately vague survey insight, available in the <code>profile_json</code> column of the Hugging Face <code>profiles</code> subset.</p>
         <div class="ds-feeds"><span class="fk">→</span><div>Forms the <b>C3 Persona Memory</b> level of the user-memory ladder and conditions the synthesis.</div></div>
       </div>
 
@@ -408,7 +408,7 @@
          fig:composition-tokens (token-weighted shares of ~3.17M tokens: 22.8, 16.4, 15.9, 15.1, 12.4, 9.2, 8.2). Bars are scaled so that 25% fills the track. -->
     <div class="ds-card ds-comp">
       <div class="ds-comp-head">
-        <div class="ds-card-title">Share of the release by lifestyle domain<span>18,471 events and about 3.17M tokens in the release</span></div>
+        <div class="ds-card-title">Share of the paper's evaluation set by lifestyle domain<span>18,471 events and about 3.17M tokens in the paper</span></div>
         <span class="ds-tag">Appendix B</span>
       </div>
       <div class="ds-comp-rows">
@@ -436,52 +436,36 @@
     <div class="section-head">
       <span class="eyebrow">Release</span>
       <h2>Get the data and the&nbsp;code</h2>
-      <p class="intro">One archive on Harvard Dataverse, one repository on GitHub, one command to lay the data out.</p>
+      <p class="intro">Browse and load the data on Hugging Face; find the evaluation code on GitHub.</p>
     </div>
     <div class="ds-rel">
       <div class="ds-card ds-tree">
-        <div class="ds-card-title">What is in the download<span>jarvis-bench_full.zip</span></div>
+        <div class="ds-card-title">What is in the download<span>WZDavid/JARVIS-Bench</span></div>
         <ul class="root">
-          <li><div class="r"><span class="nm zip">jarvis-bench_full.zip</span><span class="d">one file</span></div>
+          <li><div class="r"><span class="nm dir">data/</span><span class="d">Parquet tables</span></div>
             <ul>
-              <li><div class="r"><span class="nm dir">jarvis-bench_full/</span></div>
-            <ul>
-              <li><div class="r"><span class="nm zip">User.zip</span></div>
-                <ul>
-                  <!-- listing of the released User.zip, 2026-11-05: complete participant folders plus a few partial ones (persona and logs only) -->
-                  <li><div class="r"><span class="nm dir">User/&lt;user&gt;/</span><span class="d">one folder per participant</span></div>
-                    <ul>
-                      <li><div class="r"><span class="nm">synthetic_trajectory.json</span><span class="d">the trajectory</span></div></li>
-                      <li><div class="r"><span class="nm">profile_persona.json</span><span class="d">profile + survey insight</span></div></li>
-                      <li><div class="r"><span class="nm">skeleton.json</span><span class="d">day skeleton + clue plan</span></div></li>
-                      <li><div class="r"><span class="nm">qa_report.json</span><span class="d">validator report</span></div></li>
-                      <li><div class="r wrap"><span class="nm dir">skeleton_windows/ · chunks/ · run_logs/</span><span class="d">intermediate files</span></div></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li><div class="r"><span class="nm zip">Image.zip</span></div>
-                <ul>
-                  <li><div class="r"><span class="nm dir">Image/&lt;user&gt;/Day&lt;N&gt;/&lt;photo&gt;</span><span class="d">photographs, by day</span></div></li>
-                </ul>
-              </li>
-            </ul>
-              </li>
+              <li><div class="r"><span class="nm">events.parquet</span><span class="d">18,529 event records</span></div></li>
+              <li><div class="r"><span class="nm">days.parquet</span><span class="d">1,495 user-days</span></div></li>
+              <li><div class="r"><span class="nm">profiles.parquet</span><span class="d">42 user profiles</span></div></li>
             </ul>
           </li>
+          <li><div class="r"><span class="nm dir">docs/ · examples/</span><span class="d">documentation and usage</span></div></li>
+          <li><div class="r"><span class="nm">croissant.json</span><span class="d">dataset metadata</span></div></li>
+          <li><div class="r"><span class="nm">checksums.sha256</span><span class="d">file checksums</span></div></li>
         </ul>
       </div>
 
       <div class="ds-stack">
         <div class="ds-card ds-res">
-          <div class="hd"><h3>Dataset</h3><div class="meta">Harvard Dataverse · doi:10.7910/DVN/8UKMK1 · CC BY-NC 4.0</div></div>
-          <p>Trajectories, personas, skeletons and photographs for every released participant.</p>
-          <div class="row"><a class="btn btn-sm btn-primary" href="https://doi.org/10.7910/DVN/8UKMK1"><svg><use href="#i-db"/></svg>Harvard Dataverse</a></div>
+          <div class="hd"><h3>Dataset</h3><div class="meta">Hugging Face · WZDavid/JARVIS-Bench · CC BY-NC 4.0</div></div>
+          <p>Event records, day-level metadata and user profiles. Image descriptions are included in the text; original image files are not distributed in this repository.</p>
+          <p>The exported corpus has 18,529 events; the paper's evaluation set has 18,471. Load the <code>events</code> subset in Python with the <code>datasets</code> package; use <code>days</code> or <code>profiles</code> for the other tables.</p>
+          <div class="ds-cmd"><code id="ds-cmd">from datasets import load_dataset; events = load_dataset("WZDavid/JARVIS-Bench", "events", split="full")</code><button class="btn btn-sm" id="ds-copy"><svg><use href="#i-copy"/></svg><span>Copy</span></button></div>
+          <div class="row"><a class="btn btn-sm btn-primary" href="https://huggingface.co/datasets/WZDavid/JARVIS-Bench"><svg><use href="#i-db"/></svg>Hugging Face</a></div>
         </div>
         <div class="ds-card ds-res">
           <div class="hd"><h3>Code</h3><div class="meta">GitHub · AgentMemoryWorld/JARVIS-Bench · MIT</div></div>
-          <p>Evaluation code, prompts and the survey answer key, <code>ground_truth/survey_ground_truth.json</code>. One command lays the data out:</p>
-          <div class="ds-cmd"><code id="ds-cmd">python tools/prepare_data.py /path/to/jarvis-bench_full.zip</code><button class="btn btn-sm" id="ds-copy"><svg><use href="#i-copy"/></svg><span>Copy</span></button></div>
+          <p>Evaluation code, prompts and the survey answer key, <code>ground_truth/survey_ground_truth.json</code>.</p>
           <div class="row"><a class="btn btn-sm" href="https://github.com/AgentMemoryWorld/JARVIS-Bench"><svg><use href="#i-gh"/></svg>Open on GitHub</a></div>
         </div>
       </div>
@@ -495,7 +479,7 @@
         <ul>
           <li>Collected under a protocol approved by the IRB of the University of Illinois Chicago; every participant consented.</li>
           <li>Fully anonymous: no surnames, precise locations or calendar dates. Days are relative, <code>Day N</code>, and synthetic events carry time buckets instead of clock times.</li>
-          <li>Photographs enter the trajectory text only as action-focused captions; the photographs themselves ship for the image variants of Proactive Help and Emotion-Aware Modeling.</li>
+          <li>The Hugging Face release includes textual descriptions of images. Original photographs are not distributed in that repository.</li>
           <li>Every released trajectory was confirmed by its participant as a plausible stretch of their own life.</li>
         </ul>
       </div>

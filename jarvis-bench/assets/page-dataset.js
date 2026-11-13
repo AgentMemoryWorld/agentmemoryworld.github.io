@@ -1,4 +1,4 @@
-/* Dataset page: copy button for the prepare-data command, and the hover layer of the two validation charts. */
+/* Dataset page: copy button for the data-loading example, and the hover layer of the two validation charts. */
 (() => {
   const btn = document.getElementById("ds-copy");
   const code = document.getElementById("ds-cmd");
